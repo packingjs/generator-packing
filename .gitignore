@@ -1,6 +1,3 @@
+/*.sh
 node_modules
-generators/app/templates/mock
-generators/app/templates/static
-generators/app/templates/src
-generators/app/templates/webpack
-
+generators/app/_package.json.bak

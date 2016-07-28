@@ -6,6 +6,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var mkdirp = require('mkdirp');
 var util = require('util');
+var assign = require('object-assign');
 
 /**
  * 将用户选择项信息打平
@@ -55,45 +56,56 @@ module.exports = yeoman.Base.extend({
 
     var prompts = [
       {
-        type: 'checkbox',
-        name: 'features',
-        message: 'What more would you like?',
-        choices: [{
-          name: 'sass',
-          value: 'sass',
-          checked: true
-        }, {
-          name: 'maven',
-          value: 'maven',
-          checked: true
-        }, {
-          name: 'react',
-          value: 'react',
-          checked: true
-        }]
+        type: 'confirm',
+        name: 'react',
+        message: '使用React吗?',
+        default: true
       },
       {
         type: 'confirm',
         name: 'redux',
-        message: 'Would you like to include redux?',
+        message: '使用Redux吗?',
         default: true,
         when: function (answers) {
-          return answers.features.indexOf('react') > -1;
+          return answers.react;
         }
       },
       {
         type: 'checkbox',
+        name: 'features',
+        message: '使用哪些CSS编译器?',
+        choices: [
+          {
+            name: 'less',
+            value: 'less',
+            checked: true
+          },
+          {
+            name: 'sass',
+            value: 'sass',
+            checked: false
+          }
+        ]
+      },
+      {
+        type: 'confirm',
+        name: 'maven',
+        message: '使用Maven做前后端关联吗?',
+        default: true
+      },
+      {
+        type: 'checkbox',
         name: 'templates',
-        message: 'Which template?',
+        message: '使用哪些后端模版?',
         choices: [
           {
             name: 'html',
             value: 'html',
-            checked: false
+            checked: true
           },
           {
-            name: 'jade',
-            value: 'jade',
+            name: 'pug',
+            value: 'pug',
             checked: false
           },
           {
@@ -125,18 +137,13 @@ module.exports = yeoman.Base.extend({
             name: 'ejs',
             value: 'ejs',
             checked: false
-          },
-          {
-            name: 'markdown',
-            value: 'markdown',
-            checked: false
           }
         ]
       }
     ];
 
     return this.prompt(prompts).then(function (answers) {
-      Object.assign(this.props, flattenFeature(answers))
+      assign(this.props, flattenFeature(answers))
     }.bind(this));
   },
 

@@ -19,6 +19,7 @@
   "dependencies": {
     "chalk": "^1.0.0",
     "mkdirp": "^0.5.1",
+    "object-assign": "^4.1.0",
     "yeoman-generator": "^0.23.0",
     "yosay": "^1.0.0"
   },

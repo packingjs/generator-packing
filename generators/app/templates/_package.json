@@ -1,8 +1,7 @@
 {
-  "private": true,
-  "name": "<%= props.name%>",
+  "name": "<%= props.appname %>",
   "description": "",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "repository": "zhongzhi107/packing",
   "keywords": [
     "webpack"
@@ -11,35 +10,53 @@
   "license": "MIT",
   "scripts": {
     "build": "better-npm-run build",
+    "build:dev": "better-npm-run build:dev",
+    "build:beta": "better-npm-run build:beta",
+    "build:prod": "better-npm-run build:prod",
     "serve": "better-npm-run serve",
-    "serve:dist": "better-npm-run build:dev && better-npm-run serve:dist",
+    "serve:dist": "better-npm-run build && better-npm-run serve:dist",
     "eslint": "better-npm-run eslint"
   },
   "betterScripts": {
     "serve": {
-      "command": "babel-node webpack/webpack-dev-server.js",
+      "command": "babel-node tools/serve.js",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "",
+        "CDN_ROOT": ""
       }
     },
     "serve:dist": {
-      "command": "babel-node webpack/webpack-prd-server.js",
+      "command": "babel-node tools/serve:dist.js",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": ""
       }
     },
     "build": {
-      "command": "webpack --verbose --colors --display-error-details --config webpack/webpack.config.build.babel.js",
+      "command": "webpack --verbose --colors --display-error-details --config config/webpack.build.babel.js",
       "env": {
-        "NODE_ENV": "production",
-        "CDN_ROOT": "http://www.test1.com/prd/assets"
+        "NODE_ENV": "",
+        "CDN_ROOT": ""
       }
     },
     "build:dev": {
-      "command": "webpack --config webpack/webpack.config.build.babel.js",
+      "command": "webpack --config config/webpack.build.babel.js",
       "env": {
         "NODE_ENV": "development",
-        "CDN_ROOT": "assets"
+        "CDN_ROOT": "//l-wap1.wap.dev.cn6.qunar.com/<%= props.appname %>/dev/assets"
+      }
+    },
+    "build:beta": {
+      "command": "webpack --config config/webpack.build.babel.js",
+      "env": {
+        "NODE_ENV": "beta",
+        "CDN_ROOT": "//mobileqzz.beta.qunar.com/<%= props.appname %>/prd/assets"
+      }
+    },
+    "build:prod": {
+      "command": "webpack --config config/webpack.build.babel.js",
+      "env": {
+        "NODE_ENV": "production",
+        "CDN_ROOT": "//s.qunarzz.com/<%= props.appname %>/prd/assets"
       }
     },
     "eslint": {
@@ -50,63 +67,67 @@
     "ejs-loader": "^0.3.0",<% } %>
     "express": "^4.14.0",<% if (props.handlebars) { %>
     "handlebars": "^4.0.5",
-    "handlebars-loader": "^1.3.0",<% } %><% if (props.html) { %>
-    "html-loader": "^0.4.3",<% } %><% if (props.jade) { %>
-    "jade": "^1.11.0",
-    "jade-loader": "^0.8.0",<% } %><% if (props.markdown) { %>
-    "markdown-loader": "^0.1.7",<% } %><% if (props.mustache) { %>
+    "handlebars-loader": "^1.3.0",<% } if (props.pug) { %>
+    "pug": "^2.0.0-beta4",
+    "pug-loader": "^2.1.0",<% } if (props.mustache) { %>
     "hogan.js": "^3.0.2",
     "mustache-loader": "^0.3.1",<% } %>
     "packing-html-webpack-plugin": "^1.0.0",
-    "packing-urlrewrite": "^0.1.2",<% if (props.smarty) { %>
-    "smarty-loader": "0.0.1",<% } %>
+    "packing-urlrewrite": "^0.1.5",<% if (props.redux) { %>
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11",<% } if (props.smarty) { %>
+    "smarty-loader": "^0.0.1",<% } %>
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.1"
   },
   "dependencies": {
     "autoprefixer": "^6.3.7",
-    "babel-cli": "^6.10.1",
-    "babel-core": "^6.10.4",
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.11.4",
     "babel-eslint": "^6.1.0",
     "babel-loader": "^6.2.4",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-add-module-exports": "^0.2.1",<% if (props.react) { %>
+    "babel-plugin-react-transform": "^2.0.2",<% } %>
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-react-display-name": "^6.8.0",
     "babel-plugin-transform-runtime": "^6.9.0",
     "babel-plugin-typecheck": "^3.9.0",
     "babel-polyfill": "^6.9.1",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.11.1",
+    "babel-preset-es2015": "^6.9.0",<% if (props.react) { %>
+    "babel-preset-react": "^6.11.1",<% } %>
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.9.2",
-    "better-npm-run": "^0.0.9",
-    "classnames": "^2.2.5",
-    "clean-webpack-plugin": "^0.1.9",
+    "better-npm-run": "^0.0.10",
+    "clean-webpack-plugin": "^0.1.10",
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
-    "eslint": "^2.9.0",
+    "eslint": "2.9.0",
     "eslint-config-airbnb": "^9.0.1",
-    "eslint-loader": "^1.4.1",
-    "eslint-plugin-import": "^1.10.2",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-import": "^1.11.1",<% if (props.react) { %>
     "eslint-plugin-jsx-a11y": "^1.5.5",
-    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-react": "^5.2.2",<% } %>
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
-    "glob": "^7.0.5",
-    "json-loader": "^0.5.4",
+    "html-loader": "^0.4.3",
+    "json-loader": "^0.5.4",<% if (props.less) { %>
     "less": "^2.7.1",
-    "less-loader": "^2.2.3",
+    "less-loader": "^2.2.3",<% } %>
     "loader-utils": "^0.2.15",
+    "move-webpack-plugin": "0.0.1",
     "packing-ajax": "^0.0.1",
-    "packing-rev-webpack-plugin": "^1.0.5",
+    "packing-glob": "^1.0.1",
+    "packing-rev-webpack-plugin": "^1.0.6",
     "postcss-loader": "^0.9.1",<% if (props.react) { %>
     "react": "^15.2.1",
     "react-a11y": "^0.3.3",
-    "react-dom": "^15.2.1",
-    "react-transform-catch-errors": "^1.0.2",
-    "redbox-react": "^1.2.10",<% } %>
-    "replace-hash-webpack-plugin": "^1.4.5",
+    "react-dom": "^15.2.1",<% } if (props.redux) { %>
+    "react-redux": "^4.4.5",<% } if (props.react) { %>
+    "react-transform-catch-errors": "^1.0.2",<% } if (props.redux) { %>
+    "redbox-react": "^1.2.10",
+    "redux": "^3.5.2",<% } %>
+    "replace-hash-webpack-plugin": "^1.4.12",
     "strip-loader": "^0.1.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
