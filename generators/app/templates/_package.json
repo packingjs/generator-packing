@@ -1,13 +1,9 @@
 {
-  "name": "<%= props.appname %>",
+  "name": "<%= props.name %>",
   "description": "",
-  "version": "0.0.1",
-  "repository": "zhongzhi107/packing",
-  "keywords": [
-    "webpack"
-  ],
-  "author": "zhongzhi <zhong.zhi@163.com>",
-  "license": "MIT",
+  "version": "0.0.0",
+  "repository": "",
+  "license": "",
   "scripts": {
     "build": "better-npm-run build",
     "build:dev": "better-npm-run build:dev",
@@ -42,21 +38,21 @@
       "command": "webpack --config config/webpack.build.babel.js",
       "env": {
         "NODE_ENV": "development",
-        "CDN_ROOT": "//l-wap1.wap.dev.cn6.qunar.com/<%= props.appname %>/dev/assets"
+        "CDN_ROOT": "//l-wap1.wap.dev.cn6.qunar.com/<%= props.name %>/dev/assets"
       }
     },
     "build:beta": {
       "command": "webpack --config config/webpack.build.babel.js",
       "env": {
         "NODE_ENV": "beta",
-        "CDN_ROOT": "//mobileqzz.beta.qunar.com/<%= props.appname %>/prd/assets"
+        "CDN_ROOT": "//mobileqzz.beta.qunar.com/<%= props.name %>/prd/assets"
       }
     },
     "build:prod": {
       "command": "webpack --config config/webpack.build.babel.js",
       "env": {
         "NODE_ENV": "production",
-        "CDN_ROOT": "//s.qunarzz.com/<%= props.appname %>/prd/assets"
+        "CDN_ROOT": "//s.qunarzz.com/<%= props.name %>/prd/assets"
       }
     },
     "eslint": {
@@ -102,20 +98,21 @@
     "clean-webpack-plugin": "^0.1.10",
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
-    "eslint": "2.9.0",
+    "eslint": "^2.9.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-import": "^1.11.1",<% if (props.react) { %>
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",<% } %>
     "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.9.0",
-    "html-loader": "^0.4.3",
+    "file-loader": "^0.9.0",<% if (props.html) { %>
+    "html-loader": "^0.4.3",<% } %>
     "json-loader": "^0.5.4",<% if (props.less) { %>
     "less": "^2.7.1",
     "less-loader": "^2.2.3",<% } %>
     "loader-utils": "^0.2.15",
-    "move-webpack-plugin": "0.0.1",
+    "move-webpack-plugin": "0.0.1",<% if (props.sass) { %>
+    "node-sass": "^3.8.0",<% } %>
     "packing-ajax": "^0.0.1",
     "packing-glob": "^1.0.1",
     "packing-rev-webpack-plugin": "^1.0.6",
@@ -127,7 +124,8 @@
     "react-transform-catch-errors": "^1.0.2",<% } if (props.redux) { %>
     "redbox-react": "^1.2.10",
     "redux": "^3.5.2",<% } %>
-    "replace-hash-webpack-plugin": "^1.4.12",
+    "replace-hash-webpack-plugin": "^1.4.12",<% if (props.sass) { %>
+    "sass-loader": "^4.0.0",<% } %>
     "strip-loader": "^0.1.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",

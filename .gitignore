@@ -1,3 +1,2 @@
 /*.sh
-node_modules
-generators/app/_package.json.bak
+/node_modules

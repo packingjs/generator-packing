@@ -81,9 +81,9 @@ const webpackConfig = (options) => {
   let moduleConfig = {
     loaders: [
       { test: /\.js?$/, loaders: [strip.loader('debug'), 'babel'], exclude: /node_modules/},
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2!postcss') },
-      { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2!postcss!less') },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2!postcss!sass') },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2!postcss') },<% if (props.less) { %>
+      { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2!postcss!less') },<% } if (props.sass) { %>
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?importLoaders=2!postcss!sass') },<% } %>
       { test: /\.json$/, loader: 'json' },
       { test: /\.(jpg|png|ttf|woff|woff2|eot|svg)$/, loader: 'url?name=[name]-[hash:8].[ext]&limit=10000' },
     ]

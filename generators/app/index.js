@@ -7,6 +7,7 @@ var yosay = require('yosay');
 var mkdirp = require('mkdirp');
 var util = require('util');
 var assign = require('object-assign');
+var glob = require('packing-glob');
 
 /**
  * 将用户选择项信息打平
@@ -24,7 +25,7 @@ function flattenFeature(answers) {
         features[item] = true;
       });
     } else {
-      features[key] = true;
+      features[key] = answers[key];
     }
   });
   return features;
@@ -32,9 +33,7 @@ function flattenFeature(answers) {
 
 module.exports = yeoman.Base.extend({
   initializing: function () {
-    this.props = {
-      name: 'test'
-    };
+    this.props = {};
   },
 
   default: function () {
@@ -55,6 +54,12 @@ module.exports = yeoman.Base.extend({
     ));
 
     var prompts = [
+      {
+        type: 'input',
+        name: 'name',
+        message: '工程名称',
+        default: this.appname,
+      },
       {
         type: 'confirm',
         name: 'react',
@@ -134,6 +139,11 @@ module.exports = yeoman.Base.extend({
             checked: false
           },
           {
+            name: 'velocity',
+            value: 'velocity',
+            checked: false
+          },
+          {
             name: 'ejs',
             value: 'ejs',
             checked: false
@@ -143,25 +153,118 @@ module.exports = yeoman.Base.extend({
     ];
 
     return this.prompt(prompts).then(function (answers) {
-      assign(this.props, flattenFeature(answers))
+      this.props.name = answers.name;
+      this.props.templates = answers.templates;
+      delete answers.name;
+      assign(this.props, flattenFeature(answers));
     }.bind(this));
   },
 
-  writing: function () {
-    // this.fs.copy(
-    //   this.templatePath('dummyfile.txt'),
-    //   this.destinationPath('dummyfile.txt')
-    // );
+  writing: {
+    folders: function () {
+      var folders = ['config', 'tools'];
+      var pattern = '{' + folders.join( ',') + '}/**/*';
+      var options = {
+        cwd: this.sourceRoot()
+      };
+      // copy and replace template
+      glob(pattern, options).forEach(function(file) {
+        this.fs.copyTpl(
+          this.templatePath(file),
+          this.destinationPath(file),
+          { props: this.props }
+        );
+      }.bind(this));
 
-    this.fs.copyTpl(
-      this.templatePath('_package.json'),
-      this.destinationPath('package.json'),
-      { props: this.props }
-    );
+      // copy only
+      this.fs.copy(
+        this.templatePath('mock'),
+        this.destinationPath('mock')
+      );
+
+      this.fs.copy(
+        this.templatePath('src'),
+        this.destinationPath('src')
+      );
+
+      this.fs.copy(
+        this.templatePath('static'),
+        this.destinationPath('static')
+      );
+
+    },
+
+    packageJSON: function () {
+      this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'),
+        { props: this.props }
+      );
+    },
+
+    babelrc: function () {
+      this.fs.copyTpl(
+        this.templatePath('babelrc'),
+        this.destinationPath('.babelrc'),
+        { props: this.props }
+      );
+    },
+
+    buildShell: function () {
+      this.fs.copy(
+        this.templatePath('build.sh'),
+        this.destinationPath('build.sh')
+      );
+    },
+
+    editorConfig: function () {
+      this.fs.copy(
+        this.templatePath('editorconfig'),
+        this.destinationPath('.editorconfig')
+      );
+    },
+
+    eslintrc: function () {
+      this.fs.copy(
+        this.templatePath('eslintrc'),
+        this.destinationPath('.eslintrc')
+      );
+    },
+
+    gitignore: function () {
+      this.fs.copy(
+        this.templatePath('gitignore'),
+        this.destinationPath('.gitignore')
+      );
+    },
+
+    pom: function () {
+      if (this.props.maven) {
+        this.fs.copyTpl(
+          this.templatePath('pom.xml'),
+          this.destinationPath('pom.xml'),
+          { props: this.props }
+        );
+      }
+    },
+
+    readme: function () {
+      this.fs.copyTpl(
+        this.templatePath('README.md'),
+        this.destinationPath('README.md'),
+        { props: this.props }
+      );
+    },
 
   },
 
   install: function () {
-    // this.installDependencies();
+    this.installDependencies({
+      bower: false
+    });
+  },
+
+  end: function() {
+    console.log('🔚');
   }
 });

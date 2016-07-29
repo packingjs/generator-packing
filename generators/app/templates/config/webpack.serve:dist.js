@@ -35,14 +35,13 @@ const output = {
 };
 
 const moduleConfig = {
-  loaders: [
-    { test: /\.(jade|pug)$/, loader: 'pug' },
-    { test: /\.html$/, loader: 'html' },
-    { test: /\.ejs$/, loader: 'ejs' },
-    { test: /\.(tpl|smarty)$/, loader: 'smarty' },
-    { test: /\.handlebars$/, loader: 'handlebars' },
-    { test: /\.mustache$/, loader: 'mustache' },
-    { test: /\.md$/, loader: 'html!markdown' },
+  loaders: [<% if (props.pug) { %>
+    { test: /\.(jade|pug)$/, loader: 'pug' },<% } if (props.ejs) { %>
+    { test: /\.ejs$/, loader: 'ejs' },<% } if (props.smarty) { %>
+    { test: /\.(tpl|smarty)$/, loader: 'smarty' },<% } if (props.handlebars) { %>
+    { test: /\.handlebars$/, loader: 'handlebars' },<% } if (props.mustache) { %>
+    { test: /\.mustache$/, loader: 'mustache' },<% } if (props.html) { %>
+    { test: /\.html$/, loader: 'html' },<% } %>
   ]
 };
 

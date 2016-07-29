@@ -36,9 +36,9 @@ export default {
 
   // 模版类型，用数组形式支持多种模版，如 ['html', 'jade']
   // 新增模版后，需要在webpack配置中加上对应的loader
-  templateLoader: 'html',
+  templateLoader: <%- JSON.stringify(props.templates)%>,
   // 模版文件扩展名，用数组形式支持多种模版，如 ['.html', '.jade']
-  templateExtension: '.html',
+  templateExtension: <%- JSON.stringify(props.templates)%>,
 
   // webserver端口
   port: {
@@ -55,8 +55,7 @@ export default {
     // <script src="/vendor.js"></script>
     vendor: [
       'react',
-      'react-dom',
-      'classnames'
+      'react-dom'
     ]
   },
 

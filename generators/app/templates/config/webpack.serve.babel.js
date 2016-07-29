@@ -112,18 +112,17 @@ const webpackConfig = (options) => {
   let moduleConfig = {
     loaders: [
       { test: /\.js?$/, loaders: ['babel', 'eslint'], exclude: /node_modules/},
-      { test: /\.css$/, loader: 'style!css?importLoaders=2!postcss' },
-      { test: /\.less$/, loader: 'style!css?importLoaders=2!postcss!less' },
-      { test: /\.scss$/, loader: 'style!css?importLoaders=2!postcss!sass' },
-      { test: /\.json$/, loader: 'json' },
       { test: /\.(jpg|png|gif|ttf|woff|woff2|eot|svg)$/, loader: 'url?name=[name]-[hash:8].[ext]&limit=10000' },
-      { test: /\.(jade|pug)$/, loader: 'pug' },
-      { test: /\.html$/, loader: 'html' },
-      { test: /\.ejs$/, loader: 'ejs' },
-      { test: /\.(tpl|smart)$/, loader: 'smarty' },
-      { test: /\.handlebars$/, loader: 'handlebars' },
-      { test: /\.mustache$/, loader: 'mustache' },
-      { test: /\.md$/, loader: 'html!markdown' },
+      { test: /\.json$/, loader: 'json' },
+      { test: /\.css$/, loader: 'style!css?importLoaders=2!postcss' },<% if (props.less) { %>
+      { test: /\.less$/, loader: 'style!css?importLoaders=2!postcss!less' },<% } if (props.sass) { %>
+      { test: /\.scss$/, loader: 'style!css?importLoaders=2!postcss!sass' },<% } if (props.pug) { %>
+      { test: /\.(jade|pug)$/, loader: 'pug' },<% } if (props.html) { %>
+      { test: /\.html$/, loader: 'html' },<% } if (props.ejs) { %>
+      { test: /\.ejs$/, loader: 'ejs' },<% } if (props.smart) { %>
+      { test: /\.(tpl|smart)$/, loader: 'smarty' },<% } if (props.handlebars) { %>
+      { test: /\.handlebars$/, loader: 'handlebars' },<% } if (props.mustache) { %>
+      { test: /\.mustache$/, loader: 'mustache' },<% } %>
     ]
   };
 
