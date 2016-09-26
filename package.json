@@ -25,5 +25,6 @@
     "yosay": "^1.0.0"
   },
   "repository": "https://github.com/zhongzhi107/generator-packing",
-  "license": "MIT"
+  "license": "MIT",
+  "preferGlobal": true
 }
