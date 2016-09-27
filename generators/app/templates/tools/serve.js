@@ -36,7 +36,7 @@ app.use(urlrewrite(rewriteRules));
 app.use(webpackDevMiddleware(compiler, serverOptions));
 app.use(webpackHotMiddleware(compiler));<% if (props.template !== 'html') { %>
 app.use(template({
-  templates: templatesDistPages,
+  templates: templatesPages,
   mockData: mockPageInit,
   rewriteRules
 }));<% } %>

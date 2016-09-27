@@ -1,6 +1,6 @@
 {
   "presets": [<% if (props.react) { %>
-    "react", <% } %>,
+    "react", <% } %>
     "es2015",
     "stage-0"
   ],
@@ -10,19 +10,23 @@
     "add-module-exports",
     "transform-decorators-legacy",
     "transform-react-display-name"
-  ],
+  ]<% if (props.react) { %>,
 
   "env": {
     "development": {
-      "plugins": [<% if (props.react) { %>,
-        ["react-transform", {
-            "transforms": [{
+      "plugins": [
+        [
+          "react-transform",
+          {
+            "transforms": [
+              {
                 "transform": "react-transform-catch-errors",
                 "imports": ["react", "redbox-react"]
               }
             ]
-        }]<% } %>
+          }
+        ]
       ]
     }
-  }
+  }<% } %>
 }
