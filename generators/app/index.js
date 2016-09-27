@@ -53,6 +53,7 @@ module.exports = yeoman.Base.extend({
       'Welcome to the breathtaking ' + chalk.red('generator-packing') + ' generator!'
     ));
 
+    // @see https://github.com/SBoudrias/Inquirer.js
     var prompts = [
       {
         type: 'input',
