@@ -1,6 +1,6 @@
 {
   "presets": [<% if (props.react) { %>
-    "react", <% } %>
+    "react", <% } %>,
     "es2015",
     "stage-0"
   ],

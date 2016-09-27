@@ -57,19 +57,19 @@ module.exports = yeoman.Base.extend({
       {
         type: 'input',
         name: 'name',
-        message: '工程名称',
+        message: 'name',
         default: this.appname,
       },
       {
         type: 'confirm',
         name: 'react',
-        message: '使用React吗?',
+        message: 'Use react?',
         default: true
       },
       {
         type: 'confirm',
         name: 'redux',
-        message: '使用Redux吗?',
+        message: 'Use redux?',
         default: true,
         when: function (answers) {
           return answers.react;
@@ -78,7 +78,7 @@ module.exports = yeoman.Base.extend({
       {
         type: 'checkbox',
         name: 'features',
-        message: '使用哪些CSS编译器?',
+        message: 'Select CSS Preprocessor',
         choices: [
           {
             name: 'less',
@@ -95,14 +95,24 @@ module.exports = yeoman.Base.extend({
       {
         type: 'confirm',
         name: 'maven',
-        message: '使用Maven做前后端关联吗?',
+        message: 'Use maven?',
         default: true
       },
       {
         type: 'checkbox',
-        name: 'templates',
-        message: '使用哪些后端模版?',
+        name: 'template',
+        message: 'Which server side template to use?',
         choices: [
+          {
+            name: 'ejs',
+            value: 'ejs',
+            checked: false
+          },
+          {
+            name: 'handlebars',
+            value: 'hbs',
+            checked: false
+          },
           {
             name: 'html',
             value: 'html',
@@ -114,38 +124,13 @@ module.exports = yeoman.Base.extend({
             checked: false
           },
           {
-            name: 'ejs',
-            value: 'ejs',
-            checked: false
-          },
-          {
-            name: 'velocity',
-            value: 'velocity',
-            checked: false
-          },
-          {
-            name: 'handlebars',
-            value: 'handlebars',
-            checked: false
-          },
-          {
-            name: 'mustache',
-            value: 'mustache',
-            checked: false
-          },
-          {
             name: 'smarty',
-            value: 'smarty',
+            value: 'tpl',
             checked: false
           },
           {
             name: 'velocity',
-            value: 'velocity',
-            checked: false
-          },
-          {
-            name: 'ejs',
-            value: 'ejs',
+            value: 'vm',
             checked: false
           }
         ]
@@ -154,7 +139,7 @@ module.exports = yeoman.Base.extend({
 
     return this.prompt(prompts).then(function (answers) {
       this.props.name = answers.name;
-      this.props.templates = answers.templates;
+      this.props.template = answers.template;
       delete answers.name;
       assign(this.props, flattenFeature(answers));
     }.bind(this));

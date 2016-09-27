@@ -5,3 +5,6 @@ node_modules/
 /stats.json
 .idea/
 /templates
+/sh
+/.gitlab
+/.github
