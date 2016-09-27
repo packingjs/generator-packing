@@ -78,7 +78,7 @@ module.exports = yeoman.Base.extend({
       {
         type: 'checkbox',
         name: 'features',
-        message: 'Select CSS Preprocessor',
+        message: 'Select CSS Preprocessor:',
         choices: [
           {
             name: 'less',
@@ -173,8 +173,8 @@ module.exports = yeoman.Base.extend({
       );
 
       this.fs.copy(
-        this.templatePath('static'),
-        this.destinationPath('static')
+        this.templatePath('assets'),
+        this.destinationPath('assets')
       );
 
     },
