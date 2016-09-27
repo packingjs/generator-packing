@@ -6,8 +6,8 @@
 
 import path from 'path';
 import Express from 'express';
-import urlrewrite from 'packing-urlrewrite';
-import template from 'packing-template-smarty';
+import urlrewrite from 'packing-urlrewrite';<% if (props.template !== 'html') { %>
+import template from 'packing-template-<%= props.template %>';<% } %>
 import packing, { rewriteRules } from '../config/packing';
 
 const { assetsDist, templatesDistPages, mockPageInit } = packing.path;
@@ -15,12 +15,12 @@ const port = packing.port.dist;
 
 const app = new Express();
 app.use(Express.static(path.join(__dirname, '..', assetsDist)));
-app.use(urlrewrite(packing.rewriteRules));
+app.use(urlrewrite(packing.rewriteRules));<% if (props.template !== 'html') { %>
 app.use(template({
   templates: templatesDistPages,
   mockData: mockPageInit,
   rewriteRules
-}));
+}));<% } %>
 
 app.listen(port, (err) => {
   if (err) {

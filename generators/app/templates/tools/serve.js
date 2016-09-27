@@ -7,8 +7,8 @@
 import path from 'path';
 import Express from 'express';
 import webpack from 'webpack';
-import urlrewrite from 'packing-urlrewrite';
-import template from 'packing-template-smarty';
+import urlrewrite from 'packing-urlrewrite';<% if (props.template !== 'html') { %>
+import template from 'packing-template-<%= props.template %>';<% } %>
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../config/webpack.serve.babel';
@@ -34,12 +34,12 @@ const app = new Express();
 app.use(Express.static(path.join(__dirname, '..', assets)));
 app.use(urlrewrite(rewriteRules));
 app.use(webpackDevMiddleware(compiler, serverOptions));
-app.use(webpackHotMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler));<% if (props.template !== 'html') { %>
 app.use(template({
-  templates: templatesPages,
+  templates: templatesDistPages,
   mockData: mockPageInit,
   rewriteRules
-}));
+}));<% } %>
 
 app.listen(port, (err) => {
   if (err) {

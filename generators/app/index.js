@@ -76,19 +76,21 @@ module.exports = yeoman.Base.extend({
         }
       },
       {
-        type: 'checkbox',
-        name: 'features',
-        message: 'Select CSS Preprocessor:',
+        type: 'list',
+        name: 'css',
+        message: 'Choose a CSS Preprocessor:',
         choices: [
           {
+            name: 'none',
+            value: ''
+          },
+          {
             name: 'less',
-            value: 'less',
-            checked: true
+            value: 'less'
           },
           {
             name: 'sass',
-            value: 'sass',
-            checked: false
+            value: 'sass'
           }
         ]
       },
@@ -99,41 +101,36 @@ module.exports = yeoman.Base.extend({
         default: true
       },
       {
-        type: 'checkbox',
+        type: 'list',
         name: 'template',
-        message: 'Which server side template to use?',
+        message: 'Choose a template:',
         choices: [
           {
             name: 'ejs',
-            value: 'ejs',
-            checked: false
+            value: 'ejs'
           },
           {
             name: 'handlebars',
-            value: 'hbs',
-            checked: false
+            value: 'hbs'
           },
           {
             name: 'html',
-            value: 'html',
-            checked: true
+            value: 'html'
           },
           {
             name: 'pug',
-            value: 'pug',
-            checked: false
+            value: 'pug'
           },
           {
             name: 'smarty',
-            value: 'tpl',
-            checked: false
+            value: 'tpl'
           },
           {
             name: 'velocity',
-            value: 'vm',
-            checked: false
+            value: 'vm'
           }
-        ]
+        ],
+        default: 2
       }
     ];
 
@@ -147,6 +144,7 @@ module.exports = yeoman.Base.extend({
 
   writing: {
     folders: function () {
+      // console.log('this.props: %s', this.props);
       var folders = ['config', 'tools'];
       var pattern = '{' + folders.join( ',') + '}/**/*';
       var options = {
