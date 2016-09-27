@@ -107,10 +107,9 @@ const webpackConfig = (options) => {
   const moduleConfig = {
     loaders: [
       { test: /\.js?$/i, loaders: [strip.loader('debug'), 'babel'], exclude: /node_modules/ },
-      { test: /\.css$/i, loader: styleLoaderString() },
-      { test: /\.less$/i, loader: styleLoaderString('less') },
-      { test: /\.scss$/i, loader: styleLoaderString('sass') },
-      { test: /\.json$/i, loader: 'json' },
+      { test: /\.css$/i, loader: styleLoaderString() },<% if (props.css === 'less') { %>
+      { test: /\.less$/i, loader: styleLoaderString('less') },<% } if (props.css === 'sass') { %>
+      { test: /\.scss$/i, loader: styleLoaderString('sass') },<% } %>
       {
         test: new RegExp(`\.(${assetExtensions.join('|')})$`, 'i'),
         loader: `url?name=[path][name]-[hash:${fileHashLength}].[ext]&context=${assets}&limit=100!image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false`

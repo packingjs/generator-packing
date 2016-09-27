@@ -119,10 +119,9 @@ const webpackConfig = (options) => {
   const moduleConfig = {
     loaders: [
       { test: /\.js?$/i, loaders: ['babel', 'eslint'], exclude: /node_modules/ },
-      { test: /\.css$/i, loader: styleLoaderString() },
-      { test: /\.less$/i, loader: styleLoaderString('less') },
-      { test: /\.scss$/i, loader: styleLoaderString('sass') },
-      { test: /\.json$/i, loader: 'json' },
+      { test: /\.css$/i, loader: styleLoaderString() },<% if (props.css === 'less') { %>
+      { test: /\.less$/i, loader: styleLoaderString('less') },<% } if (props.css === 'sass') { %>
+      { test: /\.scss$/i, loader: styleLoaderString('sass') },<% } %>
       {
         test: new RegExp(`\.(${assetExtensions.join('|')})$`, 'i'),
         loader: `file?name=[path][name].[ext]&context=${assets}&emitFile=false`
