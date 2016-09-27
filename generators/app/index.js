@@ -131,6 +131,12 @@ module.exports = yeoman.Base.extend({
           }
         ],
         default: 2
+      },
+      {
+        type: 'confirm',
+        name: 'intranet',
+        message: 'Are you in the QUNAR office network?',
+        default: false
       }
     ];
 
@@ -242,9 +248,12 @@ module.exports = yeoman.Base.extend({
   },
 
   install: function () {
-    this.installDependencies({
-      bower: false
-    });
+    var options = {};
+    if (this.props.intranet) {
+      options.registry = 'http://registry.npm.corp.qunar.com';
+    }
+
+    this.npmInstall('', options);
   },
 
   end: function() {
