@@ -67,10 +67,10 @@
   },
   "devDependencies": {
     "express": "^4.14.0",<% if (props.template === 'ejs') { %>
-    "packing-template-ejs": "^1.0.0",<% } if (props.template === 'hbs') { %>
+    "packing-template-ejs": "^1.0.0",<% } if (props.template === 'handlebars') { %>
     "packing-template-handlebars": "^1.0.0",<% } if (props.template === 'pug') { %>
-    "packing-template-pug": "^1.0.2",<% } if (props.template === 'tpl') { %>
-    "packing-template-smarty": "^1.0.3",<% } if (props.template === 'vm') { %>
+    "packing-template-pug": "^1.0.2",<% } if (props.template === 'smarty') { %>
+    "packing-template-smarty": "^1.0.3",<% } if (props.template === 'velocity') { %>
     "packing-template-velocity": "^1.0.2",<% } %>
     "packing-urlrewrite": "^0.1.7",<% if (props.redux) { %>
     "redux-devtools": "^3.3.1",

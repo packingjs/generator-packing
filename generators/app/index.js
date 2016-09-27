@@ -111,7 +111,7 @@ module.exports = yeoman.Base.extend({
           },
           {
             name: 'handlebars',
-            value: 'hbs'
+            value: 'handlebars'
           },
           {
             name: 'html',
@@ -123,11 +123,11 @@ module.exports = yeoman.Base.extend({
           },
           {
             name: 'smarty',
-            value: 'tpl'
+            value: 'smarty'
           },
           {
             name: 'velocity',
-            value: 'vm'
+            value: 'velocity'
           }
         ],
         default: 2

@@ -41,7 +41,28 @@ export default {
   },
 
   // 模版文件扩展名
-  templateExtension: '.<%= props.template %>',
+  <% var templateExtension;
+  switch (props.template) {
+    case 'ejs':
+      templateExtension = 'ejs';
+      break;
+    case 'handlebars':
+      templateExtension = 'hbs';
+      break;
+    case 'pug':
+      templateExtension = 'pug';
+      break;
+    case 'smarty':
+      templateExtension = 'tpl';
+      break;
+    case 'velocity':
+      templateExtension = 'vm';
+      break;
+    default:
+      templateExtension = 'html';
+      break;
+  } %>
+  templateExtension: '.<%= templateExtension %>',
 
   // webserver端口
   port: {
@@ -58,8 +79,7 @@ export default {
     // <script src="/vendor.js"></script>
     vendor: [
       'react',
-      'react-dom',
-      'classnames'
+      'react-dom'
     ]
   },
 
