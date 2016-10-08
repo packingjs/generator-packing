@@ -129,6 +129,10 @@ module.exports = yeoman.Base.extend({
           {
             name: 'velocity',
             value: 'velocity'
+          },
+          {
+            name: 'artTemplate',
+            value: 'artTemplate'
           }
         ],
         default: 2

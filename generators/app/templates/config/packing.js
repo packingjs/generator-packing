@@ -58,6 +58,9 @@ export default {
     case 'velocity':
       templateExtension = 'vm';
       break;
+    case 'artTemplate':
+      templateExtension = 'html';
+      break;
     default:
       templateExtension = 'html';
       break;
