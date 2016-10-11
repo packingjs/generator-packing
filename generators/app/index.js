@@ -253,7 +253,11 @@ module.exports = yeoman.Base.extend({
   },
 
   install: function () {
-    var options = {};
+    var options = {
+      registry: 'https://registry.npm.taobao.org',
+      disturl: 'https://npm.taobao.org/dist',
+      sassBinarySite: 'http://npm.taobao.org/mirrors/node-sass'
+    };
     if (this.props.intranet) {
       options.registry = 'http://registry.npm.corp.qunar.com';
     }
