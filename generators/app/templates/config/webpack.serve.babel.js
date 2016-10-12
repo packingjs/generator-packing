@@ -4,24 +4,21 @@
  * @module config/webpack.serve.babel
  */
 
-import { existsSync } from 'fs';
 import path from 'path';
 import { isString, isArray, isObject, isFunction } from 'util';
 import webpack from 'webpack';
 import DashboardPlugin from 'webpack-dashboard/plugin';
-import packingGlob from 'packing-glob';
+import OpenBrowserPlugin from 'open-browser-webpack-plugin';
+import ProfilePlugin from 'packing-profile-webpack-plugin';
 import autoprefixer from 'autoprefixer';
-import packing, { assetExtensions } from './packing';
+import packing, { assetExtensions, localhost, port } from './packing';
 
 const {
   src,
   assets,
   assetsDist,
-  entries,
-  templatesPages
+  entries
 } = packing.path;
-const { templateExtension } = packing;
-const cwd = process.cwd();
 
  /**
   * 给所有入口js加上HRM的clientjs
@@ -48,42 +45,6 @@ const pushClientJS = (entry, reload) => {
 };
 
 /**
- * 根据文件的目录结构生成entry配置
- * @return {object}
- */
-const initConfig = () => {
-  const entryConfig = {};
-  const globOptions = { cwd: path.resolve(cwd, templatesPages) };
-  const pattern = isArray(templateExtension) && templateExtension.length > 1 ?
-    `**/*{${templateExtension.join(',')}}` :
-    `**/*${templateExtension}`;
-
-  packingGlob(pattern, globOptions).forEach((page) => {
-    const ext = path.extname(page).toLowerCase();
-    let key = page.replace(ext, '');
-    // 写入页面级别的配置
-    if (entryConfig[key]) {
-      key += ext;
-    }
-    let value;
-    if (isFunction(entries)) {
-      value = entries(key);
-    } else {
-      value = path.resolve(cwd, entries.replace('{pagename}', key));
-    }
-    if (existsSync(value)) {
-      entryConfig[key] = value;
-    } else {
-      console.log(`❗️ entry file not exist: ${value}`);
-    }
-  });
-
-  return {
-    entryConfig
-  };
-};
-
-/**
  * 返回样式loader字符串
  * @param {string} cssPreprocessor css预处理器类型
  * @return {string}
@@ -99,13 +60,12 @@ const styleLoaderString = (cssPreprocessor) => {
  * @return {object}
  */
 const webpackConfig = (options) => {
-  const { entryConfig } = initConfig();
   const projectRootPath = path.resolve(__dirname, '../');
   const assetsPath = path.resolve(projectRootPath, assetsDist);
   const context = path.resolve(__dirname, '..');
   const devtool = options.devtool;
 
-  let entry = entryConfig;
+  let entry = isFunction(entries) ? entries() : entries;
 
   const output = {
     chunkFilename: '[name].js',
@@ -132,9 +92,6 @@ const webpackConfig = (options) => {
   const postcss = () => [autoprefixer];
 
   const resolve = {
-    alias: {
-      'env-alias': path.resolve(__dirname, '../src/config/env', process.env.NODE_ENV)
-    },
     modulesDirectories: [src, assets, 'node_modules']
   };
 
@@ -152,7 +109,14 @@ const webpackConfig = (options) => {
     // });
   }
 
+  if (!process.env.DISABLE_OPEN_BROWSER) {
+    plugins.push(
+      new OpenBrowserPlugin({ url: `http://${localhost}:${port.dev}` })
+    );
+  }
+
   plugins.push(
+    new ProfilePlugin(),
     new webpack.DefinePlugin({
       // '__DEVTOOLS__': true,
       'process.env': {
@@ -160,7 +124,7 @@ const webpackConfig = (options) => {
         CDN_ROOT: JSON.stringify(process.env.CDN_ROOT)
       }
     }),
-    new DashboardPlugin()
+    new DashboardPlugin(),
   );
 
   // 从配置文件中获取并生成webpack打包配置
@@ -192,5 +156,5 @@ export default webpackConfig({
   hot: true,
   // 检测到module有变化时，强制刷新页面
   reload: false,
-  devtool: 'eval-source-map'
+  devtool: 'eval'
 });

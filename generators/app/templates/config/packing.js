@@ -27,44 +27,68 @@
      break;
  } %>
 
+import path from 'path';
+import packingGlob from 'packing-glob';
+
 export default {
   // 文件路径，所有目录都使用相对于项目根目录的相对目录格式
   path: {
     // 源文件目录
     src: 'src',
 
-    // 静态文件目录，可以设置在src里，也可以设置在src外
-    assets: 'assets',
-
     // 页面初始化mock数据文件存放目录
     mockPageInit: 'mock/pages',
 
-    // webpack打包入口JS文件目录
-    entries: 'src/entries/{pagename}.js',
+    // 静态文件目录，可以设置在src里，也可以设置在src外
+    assets: 'assets',
+
+    // 编译后的静态文件目录
+    // 该目录需要添加到项目根目录下的.gitignore中
+    assetsDist: 'prd',
 
     // 模版目录，如果模版支持继承或layout的话
     // 模板一般会再区分布局文件(layout)和网页文件(pages)
     templates: 'src/templates',
 
-    // 模版网页文件，如果没有使用layout的话，保持这个地址和`templates`一样
-    templatesPages: 'src/templates/pages',
-
-    // 编译输出产物目录
-    dist: 'prd',
-
-    // 编译后的静态文件目录
-    assetsDist: 'prd/assets',
-
     // 编译后的模版目录，如果模版支持继承或layout的话
     // 模板一般会再区分布局文件(layout)和网页文件(pages)
-    templatesDist: 'prd/templates',
+    // 该变量修改时，需要同步修改pom.xml文件`project.properties.qzz_files`节点值
+    // 该目录需要添加到项目根目录下的.gitignore中
+    templatesDist: 'templates',
 
-    // 编译后的模版网页文件，如果没有使用layout的话，保持这个地址和`templatesDist`一样
-    templatesDistPages: 'prd/templates/pages'
+    // 模版网页文件，如果没有使用layout的话，保持这个地址和`templates`一致
+    templatesPages: 'src/templates/pages',
+
+    // 编译后的模版网页文件，如果没有使用layout的话，保持这个地址和`templatesDist`一致
+    templatesPagesDist: 'templates/pages',
+
+    // webpack打包入口JS文件目录
+    // As value an object, a function is accepted.
+    // entries: {
+    //   index: './src/entries/index.js',
+    //   list: './src/entries/list.js'
+    // },
+    entries: () => {
+      const entryPath = 'src/entries';
+      const entryPattern = '**/*.js';
+      const cwd = path.resolve(entryPath);
+      const config = {};
+      packingGlob(entryPattern, { cwd }).forEach((page) => {
+        const ext = path.extname(page).toLowerCase();
+        const key = page.replace(ext, '');
+        config[key] = path.join(cwd, page);
+      });
+      return config;
+    }
   },
 
+  // 模版引擎类型，目前支持的类型有[html,pug,ejs,handlebars,smarty,velocity,artTemplate]
+  templateEngine: '<%= props.template%>',
   // 模版文件扩展名
   templateExtension: '.<%= templateExtension %>',
+
+  // 本地访问的域名，为了调试方便，可能改成my.qunar.com
+  localhost: 'localhost',
 
   // webserver端口
   port: {

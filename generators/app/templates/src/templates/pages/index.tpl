@@ -20,5 +20,12 @@
     {/foreach}
 
     Total: {$book@total}
+
+    <div>
+      异步获取的时间戳: <span id="now"></span>
+    </div>
+
+    <script src="/vendor.js"></script>
+    <script src="/index.js"></script>
   </body>
 </html>

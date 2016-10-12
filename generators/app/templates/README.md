@@ -35,15 +35,18 @@
   npm run serve
   ```
 
-4. 在浏览器中预览网站 `http://localhost:3001`
+4. 在浏览器中预览网站 `http://localhost:8081`
 
 5. 其他命令
-  ```
+  ```sh
   # 编译工程
   npm run build
 
-  # 编译并预览编译结果
+  # 编译并预览编译结果，端口8080
   npm run serve:dist
+
+  # 禁用启动时自动打开浏览器功能
+  DISABLE_OPEN_BROWSER=true npm run serve
   ```
 
 ### Features
@@ -52,13 +55,12 @@
 - [x]动态加载
 - [x]支持自定义打包规则和指定common.js
 - [x]yo-generator
-- [ ]集成到QDR中，自动生产job，发布无障碍
 - [x]工程新增的node_modules也能顺利在QDR中发布
 - [x]urlrewrite/自定义路由规则
 - [x]支持SPA／多入口网站／React Native
 - [x]支持多种资源的引入，如images、fonts、json
 - [x]大size图片在css中引用hash自动更新
-- [x]使用babel，支持ES6、ES7
+- [x]使用babel，支持ES6/7
 - [x]统一的eslint语法检查
 - [x]less、sass支持
 - [x]使用postcss预编译
@@ -67,9 +69,14 @@
 - [x]预览编译后的内容
 - [x]不同环境使用profiles文件
 - [x]redux-devtools
-- [x]支持多种模版[html/jade/ejs/handlebars/smarty/velocity]
-- [ ]新版本升级提示
-- [ ]不同的前后端关联方式[maven/npm/bower]
+- [x]支持多种模版
+  - html
+  - [pug](https://pugjs.org)
+  - [ejs](https://github.com/tj/ejs)
+  - [handlebars](http://handlebarsjs.com/)
+  - [smarty](http://www.smarty.net/)
+  - [velocity](http://velocity.apache.org/)
+  - [artTemplate](https://github.com/aui/artTemplate)
 
 ### Todo
 - [ ]文档
@@ -99,9 +106,9 @@
 │   └── /pages/                         # 页面初始化类型模拟数据
 ├── /prd/                               # 项目编译输出目录
 ├── /src/                               # 项目源码目录
-│   ├── /config/                        # 和网站运行相关的配置，如dev/beta环境差异变量
-│   ├── /entries/                       # webpack打包入口js
-│   └── /templates/                     # 后端模版，如jade、smarty
+│   ├── /entries/                       # webpack打包入口js（非必须）
+│   ├── /profiles/                      # 类似maven的profiles，设置不同环境下的配置（非必须）
+│   └── /templates/                     # 后端模版，如jade、smarty（非必须）
 ├── /tools/                             # packing脚本
 │   ├── /serve.js                       # serve脚本
 │   └── /serve:dist.js                  # serve:dist脚本
@@ -114,14 +121,13 @@
 ```
 
 ### 约定
-* 每个网页模版有一个对应的js入口文件 `entry.js`，保证 `entry.js`的目录结构和网页模版的目录结构一致
 * 网页模版中对静态资源引用时使用绝对路径，如 `<script src='/logo/qunar.png'>`
 * css中对静态资源引用时使用波浪线`~`开头相对路径，如 `background:url(~/logo.png)`
 
 ### Others
 ```
 # npm使用qunar源
-npm install --registry https://registry.npm.corp.qunar.com
+npm install --registry http://registry.npm.corp.qunar.com --disturl=https://npm.taobao.org/dist --sass-binary-site=http://npm.taobao.org/mirrors/node-sass
 npm install --registry http://registry.npm.taobao.com
 
 # 只安装dependencies，不安装devDependencies，适用于QDR编译机

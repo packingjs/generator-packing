@@ -6,18 +6,20 @@
 
 import path from 'path';
 import Express from 'express';
-import urlrewrite from 'packing-urlrewrite';<% if (props.template !== 'html') { %>
-import template from 'packing-template-<%= props.template %>';<% } %>
-import packing, { rewriteRules } from '../config/packing';
+import urlrewrite from 'packing-urlrewrite';
+import packing, { templateEngine, rewriteRules } from '../config/packing';
 
-const { assetsDist, templatesDistPages, mockPageInit } = packing.path;
+// eslint-disable-next-line
+const template = require(`packing-template-${templateEngine}`);
+
+const { assetsDist, templatesPagesDist, mockPageInit } = packing.path;
 const port = packing.port.dist;
 
 const app = new Express();
 app.use(Express.static(path.join(__dirname, '..', assetsDist)));
 app.use(urlrewrite(packing.rewriteRules));<% if (props.template !== 'html') { %>
 app.use(template({
-  templates: templatesDistPages,
+  templates: templatesPagesDist,
   mockData: mockPageInit,
   rewriteRules
 }));<% } %>

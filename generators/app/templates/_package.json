@@ -14,51 +14,40 @@
   },
   "betterScripts": {
     "serve": {
-      "command": "webpack-dashboard -- babel-node tools/serve.js",
-      "env": {
-        "NODE_ENV": "",
-        "CDN_ROOT": ""
-      }
+      "command": "webpack-dashboard -- babel-node tools/serve.js"
     },
     "serve:nodashboard": {
-      "command": "babel-node tools/serve.js",
-      "env": {
-        "NODE_ENV": "",
-        "CDN_ROOT": ""
-      }
+      "command": "babel-node tools/serve.js"
     },
     "serve:dist": {
-      "command": "babel-node tools/serve:dist.js",
-      "env": {
-        "NODE_ENV": ""
-      }
+      "command": "babel-node tools/serve:dist.js"
     },
     "build": {
       "command": "webpack --verbose --colors --display-error-details --config config/webpack.build.babel.js",
       "env": {
-        "NODE_ENV": "",
+        "NODE_ENV": "local",
         "CDN_ROOT": ""
       }
     },
     "build:dev": {
-      "command": "webpack --config config/webpack.build.babel.js",
+      "command": "webpack --verbose --display-error-details --config config/webpack.build.babel.js",
       "env": {
         "NODE_ENV": "development",
-        "CDN_ROOT": "//l-wap1.wap.dev.cn6.qunar.com/<%= props.name %>/dev/assets"
+        "CDN_ROOT": "//l-wap1.wap.dev.cn6.qunar.com/xxx/dev/assets"
       }
     },
     "build:beta": {
-      "command": "webpack --config config/webpack.build.babel.js",
+      "command": "webpack --verbose --display-error-details --config config/webpack.build.babel.js",
       "env": {
         "NODE_ENV": "beta",
-        "CDN_ROOT": "//mobileqzz.beta.qunar.com/<%= props.name %>/prd/assets"
+        "CDN_ROOT": "//mobileqzz.beta.qunar.com/xxx/prd/assets"
       }
     },
     "build:prod": {
-      "command": "webpack --config config/webpack.build.babel.js",
+      "command": "webpack --verbose --display-error-details --config config/webpack.build.babel.js",
       "env": {
         "NODE_ENV": "production",
-        "CDN_ROOT": "//s.qunarzz.com/<%= props.name %>/prd/assets"
+        "CDN_ROOT": "//s.qunarzz.com/xxx/prd/assets"
       }
     },
     "eslint": {
@@ -66,11 +55,12 @@
     }
   },
   "devDependencies": {
-    "express": "^4.14.0",<% if (props.template === 'artTemplate') { %>
+    "express": "^4.14.0",
+    "open-browser-webpack-plugin": "^0.0.2",<% if (props.template === 'artTemplate') { %>
     "packing-template-artTemplate": "^1.0.1",<% } if (props.template === 'ejs') { %>
     "packing-template-ejs": "^1.0.0",<% } if (props.template === 'handlebars') { %>
     "packing-template-handlebars": "^1.0.0",<% } if (props.template === 'pug') { %>
-    "packing-template-pug": "^1.0.2",<% } if (props.template === 'smarty') { %>
+    "packing-template-pug": "^1.0.4",<% } if (props.template === 'smarty') { %>
     "packing-template-smarty": "^1.0.3",<% } if (props.template === 'velocity') { %>
     "packing-template-velocity": "^1.0.2",<% } %>
     "packing-urlrewrite": "^0.1.7",<% if (props.redux) { %>
@@ -105,7 +95,7 @@
     "eslint": "^3.4.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-loader": "^1.5.0",
-    "eslint-plugin-import": "^1.14.0",<% if (props.react) { %>
+    "eslint-plugin-import": "^2.0.0",<% if (props.react) { %>
     "eslint-plugin-jsx-a11y": "^2.2.0",
     "eslint-plugin-react": "^6.2.0",<% } %>
     "extract-text-webpack-plugin": "^1.0.1",
@@ -119,6 +109,7 @@
     "node-sass": "^3.8.0",<% } %>
     "packing-ajax": "^0.0.1",
     "packing-glob": "^1.0.1",
+    "packing-profile-webpack-plugin": "^1.0.3",
     "packing-rev-webpack-plugin": "^1.0.7",
     "postcss-loader": "^0.13.0",<% if (props.react) { %>
     "react": "^15.3.1",
