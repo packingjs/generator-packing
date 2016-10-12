@@ -2,7 +2,30 @@
  * 和构建工具相关的配置信息
  * @author Joe Zhong <zhong.zhi@163.com>
  * @module config/packing
- */
+ */<% var templateExtension;
+ switch (props.template) {
+   case 'ejs':
+     templateExtension = 'ejs';
+     break;
+   case 'handlebars':
+     templateExtension = 'hbs';
+     break;
+   case 'pug':
+     templateExtension = 'pug';
+     break;
+   case 'smarty':
+     templateExtension = 'tpl';
+     break;
+   case 'velocity':
+     templateExtension = 'vm';
+     break;
+   case 'artTemplate':
+     templateExtension = 'html';
+     break;
+   default:
+     templateExtension = 'html';
+     break;
+ } %>
 
 export default {
   // 文件路径，所有目录都使用相对于项目根目录的相对目录格式
@@ -41,30 +64,6 @@ export default {
   },
 
   // 模版文件扩展名
-  <% var templateExtension;
-  switch (props.template) {
-    case 'ejs':
-      templateExtension = 'ejs';
-      break;
-    case 'handlebars':
-      templateExtension = 'hbs';
-      break;
-    case 'pug':
-      templateExtension = 'pug';
-      break;
-    case 'smarty':
-      templateExtension = 'tpl';
-      break;
-    case 'velocity':
-      templateExtension = 'vm';
-      break;
-    case 'artTemplate':
-      templateExtension = 'html';
-      break;
-    default:
-      templateExtension = 'html';
-      break;
-  } %>
   templateExtension: '.<%= templateExtension %>',
 
   // webserver端口
@@ -107,9 +106,7 @@ export default {
   // require! 表示使用本地mock文件
   rewriteRules: {
     // 网站URL与模版的对应路由关系
-    '^/$': '/index.pug',
-    '^/list$': '/list.pug',
-    '^/detail$': '/test.tpl',
+    '^/$': '/index.<%= templateExtension%>',
 
     // API转发
     '^/api/(.*)': 'require!/mock/api/$1.js'
