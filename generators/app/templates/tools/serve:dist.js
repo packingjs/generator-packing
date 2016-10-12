@@ -7,10 +7,11 @@
 import path from 'path';
 import Express from 'express';
 import urlrewrite from 'packing-urlrewrite';
-import packing, { templateEngine, rewriteRules } from '../config/packing';
+import packing, { rewriteRules } from '../config/packing';
 
-// eslint-disable-next-line
-const template = require(`packing-template-${templateEngine}`);
+<% if (props.template !== 'html') { %>// eslint-disable-next-line
+const template = require(`packing-template-${packing.templateEngine}`);
+<% } %>
 
 const { assetsDist, templatesPagesDist, mockPageInit } = packing.path;
 const port = packing.port.dist;

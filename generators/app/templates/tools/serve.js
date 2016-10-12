@@ -11,10 +11,11 @@ import urlrewrite from 'packing-urlrewrite';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../config/webpack.serve.babel';
-import packing, { templateEngine, rewriteRules } from '../config/packing';
+import packing, { rewriteRules } from '../config/packing';
 
-// eslint-disable-next-line
-const template = require(`packing-template-${templateEngine}`);
+<% if (props.template !== 'html') { %>// eslint-disable-next-line
+const template = require(`packing-template-${packing.templateEngine}`);
+<% } %>
 
 const { src, assets, templatesPages, mockPageInit } = packing.path;
 const compiler = webpack(webpackConfig);
