@@ -23,7 +23,9 @@ app.use(template({
   templates: templatesPagesDist,
   mockData: mockPageInit,
   rewriteRules
-}));<% } %>
+}));<% } else { %>
+app.use(Express.static(path.join(__dirname, '..', templatesPagesDist)));
+<% } %>
 
 app.listen(port, (err) => {
   if (err) {

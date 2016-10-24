@@ -54,13 +54,13 @@ export default {
     // 模板一般会再区分布局文件(layout)和网页文件(pages)
     // 该变量修改时，需要同步修改pom.xml文件`project.properties.qzz_files`节点值
     // 该目录需要添加到项目根目录下的.gitignore中
-    templatesDist: 'templates',
+    templatesDist: 'prd/templates',
 
     // 模版网页文件，如果没有使用layout的话，保持这个地址和`templates`一致
     templatesPages: 'src/templates/pages',
 
     // 编译后的模版网页文件，如果没有使用layout的话，保持这个地址和`templatesDist`一致
-    templatesPagesDist: 'templates/pages',
+    templatesPagesDist: 'prd/templates/pages',
 
     // webpack打包入口JS文件目录
     // As value an object, a function is accepted.
