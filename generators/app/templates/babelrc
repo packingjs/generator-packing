@@ -8,8 +8,8 @@
   "plugins": [
     "transform-runtime",
     "add-module-exports",
-    "transform-decorators-legacy",
-    "transform-react-display-name"
+    "transform-decorators-legacy"<% if (props.react) { %>,
+    "transform-react-display-name"<% } %>
   ]<% if (props.react) { %>,
 
   "env": {
