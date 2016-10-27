@@ -4,6 +4,3 @@ node_modules/
 /dist/
 /stats.json
 .idea/
-/sh
-/.gitlab
-/.github
