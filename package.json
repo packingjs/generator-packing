@@ -1,6 +1,6 @@
 {
   "name": "generator-packing",
-  "version": "1.1.7",
+  "version": "2.7.7",
   "description": "",
   "homepage": "",
   "author": {
@@ -13,7 +13,6 @@
   ],
   "main": "generators/index.js",
   "keywords": [
-    "",
     "yeoman-generator"
   ],
   "dependencies": {
@@ -24,7 +23,7 @@
     "yeoman-generator": "^0.23.0",
     "yosay": "^1.0.0"
   },
-  "repository": "https://github.com/zhongzhi107/generator-packing",
+  "repository": "packingjs/generator-packing",
   "license": "MIT",
   "preferGlobal": true
 }

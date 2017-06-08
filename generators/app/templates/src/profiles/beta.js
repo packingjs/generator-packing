@@ -1,9 +1,7 @@
 export default {
-
   // CDN根目录
-  cdnRoot: 'http://beta.test.com',
+  cdnRoot: '//mobileqzz.beta.qunar.com/<%= props.name %>/prd/assets',
   me: {
-    name: 'Joe'
+    name: 'beta'
   }
-
 };
