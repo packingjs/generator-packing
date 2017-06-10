@@ -1,6 +1,6 @@
 /**
  * 模版文件初始化数据模拟文件
- * 对应的URL为/
+ * 对应的模版为template/index
  * @author Joe Zhong <zhong.zhi@163.com>
  * @module mock/pages/index
  * @param {object} req - HTTP request object
@@ -9,6 +9,11 @@
  */
 
  export default function(req, res) {
+  //  return new Promise(function(resolve, reject) {
+  //    resolve({
+  //      isLogin: false
+  //    });
+  //  });
    return {
      name: 'Joe',
      greeting: 'Hi, there are some JScript books you may find interesting:',

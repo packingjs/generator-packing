@@ -1,7 +1,6 @@
 /**
  * 模版文件初始化数据模拟文件
- * 对应的URL为/
- * @author Joe Zhong <zhong.zhi@163.com>
+ * 该模块返回的数据在所有的模版中都能获取到
  * @module mock/pages/__global
  * @param {object} req - HTTP request object
  * @param {object} res - HTTP response object
@@ -17,4 +16,9 @@
        }
      }
    };
- };
+  //  return new Promise(function(resolve, reject) {
+  //    resolve({
+  //      isLogin: false
+  //    });
+  //  });
+};
