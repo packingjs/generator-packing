@@ -11,6 +11,10 @@
   "files": [
     "generators"
   ],
+  "scripts": {
+    "release": "standard-version",
+    "postrelease": "git push && git push origin --tags"
+  },
   "main": "generators/index.js",
   "keywords": [
     "yeoman-generator"
