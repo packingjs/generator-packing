@@ -12,7 +12,7 @@
     "generators"
   ],
   "scripts": {
-    "release": "standard-version && npm run publish",
+    "release": "standard-version && npm publish",
     "postrelease": "git push && git push origin --tags"
   },
   "main": "generators/index.js",
