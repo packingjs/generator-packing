@@ -315,6 +315,13 @@ module.exports = yeoman.Base.extend({
       }
     },
 
+    postcssrc: function () {
+      this.fs.copy(
+        this.templatePath('postcss.config.js'),
+        this.destinationPath('postcss.config.js')
+      );
+    },
+
     readme: function () {
       this.fs.copyTpl(
         this.templatePath('README.md'),
