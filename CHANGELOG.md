@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.2"></a>
+## [2.8.2](https://github.com/packingjs/generator-packing/compare/v2.8.1...v2.8.2) (2017-06-13)
+
+
+### Bug Fixes
+
+* 增加babel-plugin-transform-runtime，修复target为低版本node时缺乏runtime的错误 ([190c911](https://github.com/packingjs/generator-packing/commit/190c911))
+
+
+
 <a name="2.8.1"></a>
 ## [2.8.1](https://github.com/packingjs/generator-packing/compare/v2.8.0...v2.8.1) (2017-06-13)
 
