@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.9"></a>
+## [2.8.9](https://github.com/packingjs/generator-packing/compare/v2.8.8...v2.8.9) (2017-06-14)
+
+
+### Bug Fixes
+
+* postcss升级导致的配置错误 ([de18553](https://github.com/packingjs/generator-packing/commit/de18553))
+
+
+
 <a name="2.8.8"></a>
 ## [2.8.8](https://github.com/packingjs/generator-packing/compare/v2.8.7...v2.8.8) (2017-06-13)
 
