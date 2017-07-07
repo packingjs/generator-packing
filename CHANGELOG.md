@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.10"></a>
+## [2.8.10](https://github.com/packingjs/generator-packing/compare/v2.8.9...v2.8.10) (2017-07-07)
+
+
+### Bug Fixes
+
+* 修复模版中path.resolve错误 ([01b8304](https://github.com/packingjs/generator-packing/commit/01b8304))
+
+
+
 <a name="2.8.9"></a>
 ## [2.8.9](https://github.com/packingjs/generator-packing/compare/v2.8.8...v2.8.9) (2017-06-14)
 
