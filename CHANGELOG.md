@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.11"></a>
+## [2.8.11](https://github.com/packingjs/generator-packing/compare/v2.8.10...v2.8.11) (2017-08-03)
+
+
+### Bug Fixes
+
+* fix packing-lint error ([04eee23](https://github.com/packingjs/generator-packing/commit/04eee23))
+* fixed the formatError when packing build failed ([9149b8f](https://github.com/packingjs/generator-packing/commit/9149b8f))
+
+
+
 <a name="2.8.10"></a>
 ## [2.8.10](https://github.com/packingjs/generator-packing/compare/v2.8.9...v2.8.10) (2017-07-07)
 
