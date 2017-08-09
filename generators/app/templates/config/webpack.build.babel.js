@@ -3,9 +3,11 @@
  * 默认配置请看 `node_modules/packing/config/webpack.build.babel.js`
  *
  * @param object webpackConfig 默认配置对象
+ * @param object program packing-cli程序对象
+ * @param object appConfig config/packing.js中的配置
  */
 
-export default (webpackConfig) => {
+export default (webpackConfig, program, appConfig) => {
   const config = webpackConfig;
   // webpackConfig 为系统默认的webpack配置，此处可以根据项目情况修改
   // 修改 entry
