@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/packingjs/generator-packing/compare/v2.8.13...v2.9.0) (2017-08-09)
+
+
+### Features
+
+* 在webpack配置文件中增加了packing.js配置的参数 ([8308726](https://github.com/packingjs/generator-packing/commit/8308726))
+
+
+
 <a name="2.8.13"></a>
 ## [2.8.13](https://github.com/packingjs/generator-packing/compare/v2.8.12...v2.8.13) (2017-08-08)
 
