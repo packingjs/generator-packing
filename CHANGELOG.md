@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.9.9"></a>
+## [2.9.9](https://github.com/packingjs/generator-packing/compare/v2.9.3...v2.9.9) (2018-01-17)
+
+
+### Bug Fixes
+
+* bablerc 中增加stage-0 ([f072602](https://github.com/packingjs/generator-packing/commit/f072602))
+
+
+
 <a name="2.9.3"></a>
 ## [2.9.3](https://github.com/packingjs/generator-packing/compare/v2.9.2...v2.9.3) (2017-12-12)
 
