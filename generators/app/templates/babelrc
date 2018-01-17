@@ -5,30 +5,13 @@
       "targets": {
         "browsers": ["> 1%", "Android >= 4.4", "IOS >= 7", "ie >= 9"]
       }
-    }]
+    }],
+    "stage-0"
   ],
 
   "plugins": [
     "add-module-exports",
     "transform-decorators-legacy"<% if (props.react) { %>,
     "transform-react-display-name"<% } %>
-  ]<% if (props.react) { %>,
-
-  "env": {
-    "development": {
-      "plugins": [
-        [
-          "react-transform",
-          {
-            "transforms": [
-              {
-                "transform": "react-transform-catch-errors",
-                "imports": ["react", "redbox-react"]
-              }
-            ]
-          }
-        ]
-      ]
-    }
-  }<% } %>
+  ]
 }

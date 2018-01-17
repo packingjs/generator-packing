@@ -1,3 +1,6 @@
 module.exports = {
-  parser: false
+  parser: false,
+  plugins: {<% if (props.css === 'cssnext') { %>
+    'postcss-cssnext': {}<% } %>
+  }
 };

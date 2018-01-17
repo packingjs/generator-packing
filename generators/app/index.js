@@ -128,6 +128,10 @@ module.exports = yeoman.Base.extend({
               value: 'css',
             },
             {
+              name: 'cssnext',
+              value: 'cssnext',
+            },
+            {
               name: 'less',
               value: 'less',
             },
@@ -207,7 +211,7 @@ module.exports = yeoman.Base.extend({
 
       this.fs.copy(
         this.templatePath('src/entries/test.css'),
-        this.destinationPath('src/entries/test.' + this.props.css)
+        this.destinationPath('src/entries/test.' + (this.props.css === 'cssnext' ? 'css' : this.props.css))
       );
 
       this.fs.copy(
@@ -316,9 +320,10 @@ module.exports = yeoman.Base.extend({
     },
 
     postcssrc: function () {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('postcss.config.js'),
-        this.destinationPath('postcss.config.js')
+        this.destinationPath('postcss.config.js'),
+        { props: this.props }
       );
     },
 

@@ -16,12 +16,13 @@
   "pre-commit": [
     "lint"
   ],
-  "dependencies": {<% if (props.css === 'less') { %>
+  "dependencies": {
+    "babel-preset-stage-0": "^6.24.1",<% if (props.css === 'less') { %>
     "less": "^2.7.2",
-    "less-loader": "^4.0.3",<% } if (props.css === 'sass') { %>
+    "less-loader": "^4.0.3",<% } if (props.css === 'cssnext') { %>
+    "postcss-cssnext": "^3.0.2",<% } if (props.css === 'sass') { %>
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.0",<% } if (props.react) { %>
-    "babel-plugin-react-transform": "^3.0.0",
     "react": "^16.2.0",
     "react-a11y": "^1.0.0",
     "react-dom": "^16.2.0",
