@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.9.10"></a>
+## [2.9.10](https://github.com/packingjs/generator-packing/compare/v2.9.9...v2.9.10) (2018-01-25)
+
+
+### Bug Fixes
+
+* 修复cdnroot路径，在末端加上反斜杠 ([e02f54f](https://github.com/packingjs/generator-packing/commit/e02f54f))
+
+
+
 <a name="2.9.9"></a>
 ## [2.9.9](https://github.com/packingjs/generator-packing/compare/v2.9.3...v2.9.9) (2018-01-17)
 
