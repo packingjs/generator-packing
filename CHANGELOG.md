@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.9.13"></a>
+## [2.9.13](https://github.com/packingjs/generator-packing/compare/v2.9.12...v2.9.13) (2018-02-01)
+
+
+
 <a name="2.9.12"></a>
 ## [2.9.12](https://github.com/packingjs/generator-packing/compare/v2.9.11...v2.9.12) (2018-01-26)
 
