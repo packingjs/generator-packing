@@ -12,7 +12,6 @@ help()
   echo "  dev\t开发环境"
   echo "  beta\t测试环境"
   echo "  prod\t线上环境"
-
 }
 
 if [ ! -n "$1" ]; then
@@ -32,4 +31,8 @@ else
 
   # 开始编译工程
   npm run build:$1
+
+  # 调整编译产物的目录结构
+  mv prd/templates .
+
 fi

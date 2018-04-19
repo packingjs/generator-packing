@@ -7,6 +7,8 @@ var util = require('util');
 var assign = require('object-assign');
 var glob = require('packing-glob');
 var os = require('os');
+var child_process = require('child_process');
+var semversion = require('semversion');
 
 var templateExtensions = {
   html: 'html',
@@ -64,6 +66,20 @@ module.exports = yeoman.Base.extend({
   },
 
   initializing: function () {
+    var cmd = 'npm info generator-packing';
+    var stdout = child_process.execSync(cmd);
+    try {
+      eval('var info = ' + stdout.toString());
+    } catch (e) {
+      console.log(chalk.red('检查更新失败'));
+    }
+    var lastVersion = info.version;
+    var pkg = require('../../package.json');
+    var currentVersion = pkg.version;
+    if (semversion.from(currentVersion).le(lastVersion)) {
+      var message = 'Update available: ' + chalk.bold(lastVersion) + chalk.gray(' (current: ' + currentVersion + ')') + '\nRun ' + chalk.magenta('npm install -g generator-packing') + ' to update. '
+      console.log(yosay(message, { maxLength: 50 }));
+    }
     this.props = {};
   },
 
@@ -197,26 +213,36 @@ module.exports = yeoman.Base.extend({
 
   writing: {
     folders: function () {
-    // copy only
+      // copy only
+      this.fs.copy(
+        this.templatePath('assets'),
+        this.destinationPath('assets')
+      );
+
       this.fs.copy(
         this.templatePath('mock'),
         this.destinationPath('mock')
       );
 
+      this.fs.copy(
+        this.templatePath('src/common/default.css'),
+        this.destinationPath('src/common/default.' + (this.props.css === 'cssnext' ? 'css' : this.props.css))
+      );
+
+      this.fs.copy(
+        this.templatePath('src/common/now.js'),
+        this.destinationPath('src/common/now.js')
+      );
+
       this.fs.copyTpl(
-        this.templatePath('src/entries/index.js'),
-        this.destinationPath('src/entries/index.js'),
+        this.templatePath('src/common/style.js'),
+        this.destinationPath('src/common/style.js'),
         { props: this.props }
       );
 
       this.fs.copy(
-        this.templatePath('src/entries/test.css'),
-        this.destinationPath('src/entries/test.' + (this.props.css === 'cssnext' ? 'css' : this.props.css))
-      );
-
-      this.fs.copy(
-        this.templatePath('src/profiles'),
-        this.destinationPath('src/profiles')
+        this.templatePath('src/pages'),
+        this.destinationPath('src/pages')
       );
 
       if (this.props.template === 'pug') {
@@ -228,8 +254,8 @@ module.exports = yeoman.Base.extend({
 
       var ext = templateExtensions[this.props.template];
       this.fs.copy(
-        this.templatePath('src/templates/pages/index.' + ext),
-        this.destinationPath('src/templates/pages/index.' + ext)
+        this.templatePath('src/templates/pages/default.' + ext),
+        this.destinationPath('src/templates/pages/default.' + ext)
       );
 
       this.fs.copy(
@@ -237,12 +263,7 @@ module.exports = yeoman.Base.extend({
         this.destinationPath('src/README.md')
       );
 
-      this.fs.copy(
-        this.templatePath('assets'),
-        this.destinationPath('assets')
-      );
-
-      var folders = ['config', 'src/profiles'];
+      var folders = ['config', 'profiles'];
       var pattern = '{' + folders.join(',') + '}/**/*';
       var options = {
         cwd: this.sourceRoot(),
@@ -262,6 +283,13 @@ module.exports = yeoman.Base.extend({
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         { props: this.props }
+      );
+    },
+
+    dotenv: function () {
+      this.fs.copy(
+        this.templatePath('.env'),
+        this.destinationPath('.env')
       );
     },
 

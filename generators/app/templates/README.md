@@ -5,8 +5,6 @@
 1. 启动开发模式
   ```
   npm run serve
-  # window系统使用下面的命令
-  # npm run serve:normal
   ```
 
 2. 在浏览器中预览网站 `http://localhost:8081`
@@ -24,9 +22,6 @@
   # 编译并预览编译结果，端口8080
   npm run serve:dist
 
-  # 启动不带webpack-dashboard的开发环境
-  npm run serve:normal
-
   # 启动时自动打开浏览器功能
   npm run serve -- --open_browser
   npm run serve -- -o
@@ -34,6 +29,10 @@
   # 启动时强制清除DLL缓存功能
   npm run serve -- --clean_cache
   npm run serve -- -c
+
+  # 编译时自动打开包体积报告网页
+  npm run build -- --open
+  npm run build -- -o
   ```
 
 ## 目录结构
@@ -42,16 +41,17 @@
 .
 ├── /assets/                            # 静态资源，如图片、字体
 ├── /config/                            # webpack配置文件
-│   ├── /packing.js                     # 和构建工具相关的配置
+│   ├── /packing.js                     # packing相关的配置
 │   ├── /webpack.build.babel.js         # webpack编译环境配置文件
+│   ├── /webpack.dll.babel.js           # webpack dll编译环境配置文件
 │   └── /webpack.serve:dist.js          # webpack预览编译后结果的配置文件
 ├── /mock/                              # 模拟数据
 │   ├── /api/                           # API接口类型模拟数据
 │   └── /pages/                         # 页面初始化类型模拟数据
 ├── /prd/                               # 项目编译输出目录
+├── /profiles/                          # 类似maven的profiles，设置不同环境下的配置
 ├── /src/                               # 项目源码目录
 │   ├── /entries/                       # webpack打包入口js
-│   ├── /profiles/                      # 类似maven的profiles，设置不同环境下的配置
 │   └── /templates/                     # 后端模版，如jade、smarty
 ├── .babelrc                            # babel配置
 ├── .editorconfig                       # 代码编辑器配置
@@ -67,6 +67,27 @@
 ```css
 background: url(~images/packing-logo.png)
 ```
+
+## 关于 `git commit -m` 规范提议
+本工程使用了`standard-version`版本管理工具  
+> 该工具将通过git commit -m 时填写的信息，自动升级version版本号，并自动生成 `CHANGELOG.md` 记录文件  
+> 只有符合change-log规范要求的提交信息，才会被记录并作为升级version的依据，不符合的提交信息将被忽略  
+
+提议规范：  
+- 需求开发时，若一个功能完成，提交时用`feat([页面名/组件名/PMO编号]): `开头；  
+  若功能未完成，不重要的提交时不使用规范开头，重要的提交时使用`chore: `开头；  
+  样式修改提交时使用`style: `开头。  
+- 修复bug，全部修完并验证之后提交时使用`fix([页面名/组件名/PMO编号]): `开头；  
+  未全部修复完成时，不重要的提交不使用规范开头，重要的提交使用`chore: `开头。  
+- 修改文档、注释等，提交时用`docs: `开头  
+- 其他重要修改提交时都使用`chore: `开头，不使用`refactor` `perf` `test`。  
+- feat、 fix 等后面的括号内表示scope，可以不写括号及内容，建议写上PMO编号。  
+- 上线前最后一次提交前，使用`npm run release`命令，来自动升级version版本号并更新CHANGELOG.md，然后push。  
+
+参考资料：  
+- [Git Commit Guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit)  
+- [Standard Version](https://github.com/conventional-changelog/standard-version)
+
 
 ## Examples
 https://github.com/zhongzhi107/packing/tree/master/examples
@@ -127,15 +148,6 @@ npm install --registry http://registry.npm.corp.qunar.com --production
     a.src = `/${logo}`;
   ```
 
-2. 手动拼资源的URL地址，获取到静态资源的uri地址 `process.env.CDN_ROOT`，从而手工拼接url，这种方式引入的静态资源不会做md5
-
-  ```js
-  // index.js
-  var a = new Image();
-  a.src = process.env.CDN_ROOT + '/images/logo.png';
-  ```
-
-
 ### webpackJsonp is not defined
 可能配置了common chunks，公共文件打到了vendor.js，需要在页面引用vendor.js，
 ```html
@@ -150,30 +162,6 @@ npm install --registry http://registry.npm.corp.qunar.com --production
 启动时使用参数强制删除缓存
 ```
 npm run serve -- --clean_cache
-```
-
-### dll_vendor:Uncaught ReferenceError: __webpack_require__ is not defined
-vendor.js里没有打入任何js，检查packing.js的 `commonChunks.vendor` 配置
-
-### 网页需要引入一个less文件，但这个网页没有js文件，我应该如何把这个less编译成css
-在 config/packing.js 的 `entries` 添加这个less文件，如
-```js
-entries: {
-  abc: './src/entries/abc.less'
-  // 需要输出到不同路径的话可以随意修改key值
-  // 'test/abc': './src/entries/abc.less'
-}
-```
-编译时会把 `abc.less` 编译成 `prd/css/abc-xxxxxxxx.css`，同时html中的引用也会自动更新
-
-```html
-<!--编译前html代码-->
-<link href="/abc.css" rel="stylesheet" />
-```
-
-```html
-<!--编译后html代码-->
-<link href="/abc-xxxxxxxx.css" rel="stylesheet" />
 ```
 
 ### 本地编译正常，在编译服务器上发布时却提示找不到某些依赖包

@@ -9,12 +9,7 @@
 
  export default function(req, res) {
    return {
-     isLogin: true,
-     deep: {
-       a: {
-         b: 'deep value'
-       }
-     }
+     name: 'Packing'
    };
   //  return new Promise(function(resolve, reject) {
   //    resolve({
