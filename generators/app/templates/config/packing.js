@@ -34,6 +34,8 @@ export default (packing) => {
   p.template.engine = '<%= props.template%>';
   // 模版文件扩展名
   p.template.extension = '.<%= templateExtension%>';
+  // 通用模版位置
+  p.template.source = 'src/templates/pages/default.<%= templateExtension%>';
   // 网站自定义配置
   p.rewriteRules = {
     // 网站URL与模版的对应路由关系

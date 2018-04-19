@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npm run serve",
-    "build": "packing build",
+    "build": "packing build -o",
     "build:dev": "NODE_ENV=development packing build",
     "build:beta": "NODE_ENV=beta packing build",
     "build:prod": "NODE_ENV=production packing build",
@@ -29,7 +29,7 @@
     "react-transform-catch-errors": "^1.0.2",<% } if (props.redux) { %>
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",<% } %>
-    "packing": "^3.0.0-beta.10"
+    "packing": "^3.0.0-beta.11"
   },
   "devDependencies": {
     "eslint": "^4.12.1",
