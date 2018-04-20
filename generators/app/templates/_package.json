@@ -11,7 +11,7 @@
     "build:prod": "NODE_ENV=production packing build",
     "serve": "npm start",
     "serve:dist": "npm run start:dist",
-    "lint": "eslint --fix src"
+    "lint": "stylelint --fix \"src/**/*.(css|less|sass|scss)\" && eslint --fix src",
   },
   "pre-commit": [
     "lint"
@@ -30,7 +30,7 @@
     "react-transform-catch-errors": "^1.0.2",<% } if (props.redux) { %>
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",<% } %>
-    "packing": "^3.0.0-beta.11"
+    "packing": "^3.0.0-beta.12"
   },
   "devDependencies": {
     "eslint": "^4.12.1",

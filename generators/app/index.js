@@ -288,7 +288,7 @@ module.exports = yeoman.Base.extend({
 
     dotenv: function () {
       this.fs.copy(
-        this.templatePath('.env'),
+        this.templatePath('env'),
         this.destinationPath('.env')
       );
     },
@@ -360,6 +360,13 @@ module.exports = yeoman.Base.extend({
         this.templatePath('README.md'),
         this.destinationPath('README.md'),
         { props: this.props }
+      );
+    },
+
+    stylelintrc: function () {
+      this.fs.copy(
+        this.templatePath('stylelintrc'),
+        this.destinationPath('.stylelintrc')
       );
     },
 
