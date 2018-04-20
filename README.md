@@ -2,6 +2,46 @@
 
 一个快速生成 [Packing](https://packingjs.github.io/) 工程的手脚架工具。
 
+## 迁移到 packing 3
+* 用 `file-loader` 代替 `url-loader` 加载静态文件
+* 使用 `dotenv` 加载 `process.env` 环境变量
+* 将 `packing-template` 合并到 `packing` 工程，方便开发调试
+* 调整 `packing.path` 结构
+    - `path.dll` 更名为 `path.tmpDll`
+    - 删除 `assetsDist` `templatesDist` `templatesPagesDist`
+    - 删除 `packing.path.assets` 配置，如果希望直接 `import` `path.assets` 下的文件请使用 `webpack.resolve.alias` 设置
+      ```js
+      webpackConfig.resolve.alias = {
+        assets: 'assets'
+      };
+      ```
+    - 分为 `src` `dist` 两类，每种目录均使用 `root` 的相对目录
+    - 简化 `templates` 目录设置
+      - {string}:
+      - {object}
+        - layout:
+        - pages:
+    - `mockPageInit` 更名为 `mockPages`
+
+* `path.templates` 结构调整
+    - 兼容字符串类型参数
+    - 允许传入包含 `layout` `pages` 的对象参数
+
+* 默认模版类型改为 `pug`
+    - `templateEngine` 默认值由 `html` 改为 `pug`
+    - `templateExtension` 默认值由 `.html` 改为 `.pug`
+
+* `src/profiles` --> `profiles`
+    - 位置变化：该目录无需编译，移动到 `src` 目录外
+    - 格式变化：使用 `key=value` 的方式描述，每行一个配置
+
+* 编译输出目录由 `prd/assets/` 变更为 `prd/`
+* `config/packing.js` 增加了更多的配置参数
+* 增加 `stylelint` 功能
+* 增加包体积分析报表
+* 使用 `SplitChunkPlugin` 代替 `CommonChunkPlugin`，配置 vendor 时支持正则
+
+
 ## 特点
 * 不依赖 host 文件，根据环境自动切换资源路径
 * 节约开发服务器，多分支开发部署到同一台服务器不会相互覆盖
@@ -424,7 +464,7 @@ export default {
 
   /**
    * commonChunks 配置
-   * 可以配置多个 common 包
+   * 可以配置多个 common 包，配置的包名称会转换为正则表达式
    * 该配置分别在以下过程中被调用：
    * - 在 `packing serve` 任务中被 `DllPlugin` 调用
    * - 在 `packing build` 任务中被 `SplitChunkPlugin` 调用
@@ -666,5 +706,3 @@ export default (webpackConfig) => {
 `node` 使用的是公司内部npm源，稳定性差，有些包无论如何都下载失败，另外该方式需要 `CM` 来支持，推荐大家使用 `sfile`。
 
 ### portal
-
-## 迁移到 packing 3
