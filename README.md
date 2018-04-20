@@ -545,7 +545,7 @@ export default {
 ```
 
 #### 如何使用不同的母模版
-可以使用 `entry.settings.js` 来控制网页使用哪一个母模版
+可以使用 `entry.settings.js` 来控制网页使用的母模版位置，默认位置为 `src/templates/pages/default.pug`
 ```js
 // src/pages/login/entry.settings.js
 export default {
