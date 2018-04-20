@@ -39,7 +39,7 @@ export default (packing) => {
   // 网站自定义配置
   p.rewriteRules = {
     // 网站URL与模版的对应路由关系
-    // '^/$': '/index.<%= templateExtension%>',
+    '^/$': '/index',
     // API转发
     '^/api/(.*)': 'require!/mock/api/$1.js'
   };

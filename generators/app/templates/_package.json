@@ -3,13 +3,14 @@
   "description": "前端工程 - <%= props.name %>",
   "version": "1.0.0",
   "scripts": {
-    "start": "npm run serve",
+    "start": "packing serve",
+    "start:dist": "packing build && packing serve-dist",
     "build": "packing build -o",
     "build:dev": "NODE_ENV=development packing build",
     "build:beta": "NODE_ENV=beta packing build",
     "build:prod": "NODE_ENV=production packing build",
-    "serve": "packing serve",
-    "serve:dist": "packing build && packing serve-dist",
+    "serve": "npm start",
+    "serve:dist": "npm run start:dist",
     "lint": "eslint --fix src"
   },
   "pre-commit": [
