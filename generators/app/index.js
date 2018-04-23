@@ -363,6 +363,13 @@ module.exports = yeoman.Base.extend({
       );
     },
 
+    stylelintignore: function () {
+      this.fs.copy(
+        this.templatePath('stylelintignore'),
+        this.destinationPath('.stylelintignore')
+      );
+    },
+
     stylelintrc: function () {
       this.fs.copy(
         this.templatePath('stylelintrc'),

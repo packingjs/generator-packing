@@ -124,7 +124,7 @@
 
 ## packing.js 配置说明
 ```js
-export default {
+{
   /**
    * 本地访问的域名
    * 如果需要使用 `qunar.com` 的 cookie，需要改成类似 `my.qunar.com` 这种
@@ -342,6 +342,29 @@ export default {
     description: false,
 
     /**
+     * 生成网页中必须包含的 chunks 列表
+     * @type {null|array}
+     */
+    chunks: null,
+
+    /**
+     * 生成网页中不包含的 chunks 列表
+     * @type {null|array}
+     */
+    excludeChunks: null,
+
+    /**
+     * 生成网页中 chunks 排序方式
+     * - 'none': 按 webpack 生成顺序插入
+     * - 'id': 按 chunks id 正向排序
+     * - 'manual': 手动排序（暂不可用）
+     * - 'commonChunksFirst': 按 common chunks 优先方式排序
+     * - 'reverse': 按当前排序反向排序
+     * @type {string}
+     */
+    chunksSortMode: 'commonChunksFirst',
+
+    /**
      * 网页文件中需要在编译时替换为 _hash 的标签属性列表
      * 格式为 tag:attribute
      * 如果想对所有标签的某个属性替换，请使用 * 代替 tag
@@ -384,16 +407,22 @@ export default {
     enable: true,
 
     /**
-     * 文件名与 hash 连接使用的字符串
-     * @type {string}
+     * 缓存选项
+     * @type {object}
      */
-    delimiter: '_',
+    options: {
+      /**
+       * 文件名与 hash 连接使用的字符串
+       * @type {string}
+       */
+      delimiter: '_',
 
-    /**
-     * hash 长度
-     * @type {number}
-     */
-    fileHashLength: 8
+      /**
+       * hash 长度
+       * @type {number}
+       */
+      fileHashLength: 8
+    }
   },
 
   /**
@@ -432,7 +461,7 @@ export default {
      * 是否启用 `stylelint`
      * @type {bool}
      */
-    enable: false,
+    enable: true,
 
     /**
      * `stylelint` 配置项
@@ -441,6 +470,23 @@ export default {
      */
     options: {
       files: ['**/*.css', '**/*.less', '**/*.s?(a|c)ss']
+    }
+  },
+
+  /** eslint 配置 */
+  eslint: {
+    /**
+     * 是否启用 `eslint`
+     * @type {bool}
+     */
+    enable: true,
+
+    /**
+     * `eslint` 配置项
+     * @type {object}
+     * @see {@link https://github.com/webpack-contrib/eslint-loader|eslint options}
+     */
+    options: {
     }
   },
 
@@ -515,17 +561,19 @@ export default {
      */
     enable: false,
 
-    /**
-     * GraphQL 地址
-     * @type {string}
-     */
-    graphqlEndpoint: '/graphql',
+    options: {
+      /**
+       * GraphQL 地址
+       * @type {string}
+       */
+      graphqlEndpoint: '/graphql',
 
-    /**
-     * GraphiQL 地址
-     * @type {string}
-     */
-    graphiqlEndpoint: '/graphiql'
+      /**
+       * GraphiQL 地址
+       * @type {string}
+       */
+      graphiqlEndpoint: '/graphiql'
+    }
   },
 
   /**
