@@ -349,8 +349,8 @@ module.exports = yeoman.Base.extend({
 
     postcssrc: function () {
       this.fs.copyTpl(
-        this.templatePath('postcss.config.js'),
-        this.destinationPath('postcss.config.js'),
+        this.templatePath('postcssrc.js'),
+        this.destinationPath('.postcssrc.js'),
         { props: this.props }
       );
     },
@@ -372,8 +372,8 @@ module.exports = yeoman.Base.extend({
 
     stylelintrc: function () {
       this.fs.copy(
-        this.templatePath('stylelintrc'),
-        this.destinationPath('.stylelintrc')
+        this.templatePath('stylelintrc.js'),
+        this.destinationPath('.stylelintrc.js')
       );
     },
 

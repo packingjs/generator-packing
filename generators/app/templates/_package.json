@@ -11,7 +11,9 @@
     "build:prod": "NODE_ENV=production packing build",
     "serve": "npm start",
     "serve:dist": "npm run start:dist",
-    "lint": "stylelint --fix \"src/**/*.(css|less|sass|scss)\" && eslint --fix src",
+    "stylelint": "stylelint --fix \"src/**/*.(css|less|sass|scss)\"",
+    "eslint": "eslint --fix src",
+    "lint": "npm run stylelint && npm run eslint"
   },
   "pre-commit": [
     "lint"
