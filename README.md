@@ -2,46 +2,6 @@
 
 一个快速生成 [Packing](https://packingjs.github.io/) 工程的手脚架工具。
 
-## 迁移到 packing 3
-* 用 `file-loader` 代替 `url-loader` 加载静态文件
-* 使用 `dotenv` 加载 `process.env` 环境变量
-* 将 `packing-template` 合并到 `packing` 工程，方便开发调试
-* 调整 `packing.path` 结构
-    - `path.dll` 更名为 `path.tmpDll`
-    - 删除 `assetsDist` `templatesDist` `templatesPagesDist`
-    - 删除 `packing.path.assets` 配置，如果希望直接 `import` `path.assets` 下的文件请使用 `webpack.resolve.alias` 设置
-      ```js
-      webpackConfig.resolve.alias = {
-        assets: 'assets'
-      };
-      ```
-    - 分为 `src` `dist` 两类，每种目录均使用 `root` 的相对目录
-    - 简化 `templates` 目录设置
-      - {string}:
-      - {object}
-        - layout:
-        - pages:
-    - `mockPageInit` 更名为 `mockPages`
-
-* `path.templates` 结构调整
-    - 兼容字符串类型参数
-    - 允许传入包含 `layout` `pages` 的对象参数
-
-* 默认模版类型改为 `pug`
-    - `templateEngine` 默认值由 `html` 改为 `pug`
-    - `templateExtension` 默认值由 `.html` 改为 `.pug`
-
-* `src/profiles` --> `profiles`
-    - 位置变化：该目录无需编译，移动到 `src` 目录外
-    - 格式变化：使用 `key=value` 的方式描述，每行一个配置
-
-* 编译输出目录由 `prd/assets/` 变更为 `prd/`
-* `config/packing.js` 增加了更多的配置参数
-* 增加 `stylelint` 功能
-* 增加包体积分析报表
-* 使用 `SplitChunkPlugin` 代替 `CommonChunkPlugin`，配置 vendor 时支持正则
-
-
 ## 特点
 * 不依赖 host 文件，根据环境自动切换资源路径
 * 节约开发服务器，多分支开发部署到同一台服务器不会相互覆盖
@@ -252,133 +212,145 @@
   /** 模版配置 */
   template: {
     /**
-     * 模版引擎类型
-     * 目前支持
-     * - html
-     * - pug
-     * - ejs
-     * - handlebars
-     * - smarty
-     * - velocity
-     * - artTemplate
-     * @type {string}
-     */
-    engine: 'pug',
-
-    /**
-     * 模版文件扩展名
-     * @type {string}
-     */
-    extension: '.pug',
-
-    /**
-     * 是否根据 `entry pointer` 自动生成网页文件
+     * 是否启用 packing template
      * @type {bool}
      */
-    autoGeneration: true,
+    enable: true,
 
     /**
-     * 是否往模版中注入 assets
-     * @type {bool}
+     * packing template 选项
+     * @type {object}
      */
-    inject: true,
+    options: {
+      /**
+       * 模版引擎类型
+       * 目前支持
+       * - html
+       * - pug
+       * - ejs
+       * - handlebars
+       * - smarty
+       * - velocity
+       * - artTemplate
+       * @type {string}
+       */
+      engine: 'pug',
 
-    /**
-     * JavaScript Chunk 注入的位置
-     * - 'head': 在</head>前注入
-     * - 'body': 在</body>前注入
-     * @type {'head'|'body'}
-     */
-    scriptInjectPosition: 'body',
+      /**
+       * 模版文件扩展名
+       * @type {string}
+       */
+      extension: '.pug',
 
-    /**
-     * 是否往模版中注入 PWA manifest.json
-     * @type {bool}
-     */
-    injectManifest: false,
+      /**
+       * 是否根据 `entry pointer` 自动生成网页文件
+       * @type {bool}
+       */
+      autoGeneration: true,
 
-    /**
-     * `manifest.json` 文件位置
-     * @type {string}
-     */
-    manifest: 'manifest.json',
+      /**
+       * 是否往模版中注入 assets
+       * @type {bool}
+       */
+      inject: true,
 
-    /**
-     * 生成网页用的源文件位置
-     * @type {string}
-     */
-    source: 'src/templates/pages/default.pug',
+      /**
+       * JavaScript Chunk 注入的位置
+       * - 'head': 在</head>前注入
+       * - 'body': 在</body>前注入
+       * @type {'head'|'body'}
+       */
+      scriptInjectPosition: 'body',
 
-    /**
-     * 生成网页使用的字符编码
-     * @type {string}
-     */
-    charset: 'UTF-8',
+      /**
+       * 是否往模版中注入 PWA manifest.json
+       * @type {bool}
+       */
+      injectManifest: false,
 
-    /**
-     * 生成网页使用的网页标题
-     * @type {string}
-     */
-    title: '',
+      /**
+       * `manifest.json` 文件位置
+       * @type {string}
+       */
+      manifest: 'manifest.json',
 
-    /**
-     * 生成网页使用的 favicon 图标
-     * - false: 不使用 favicon 图标
-     * - 非空字符串: favicon 图标的位置
-     * @type {(bool|string)}
-     */
-    favicon: false,
+      /**
+       * 生成网页用的源文件位置
+       * @type {string}
+       */
+      source: 'src/templates/pages/default.pug',
 
-    /**
-     * 生成网页使用的关键字
-     * @type {(bool|string)}
-     */
-    keywords: false,
+      /**
+       * 生成网页使用的字符编码
+       * @type {string}
+       */
+      charset: 'UTF-8',
 
-    /**
-     * 生成网页使用的网页标题
-     * @type {(bool|string)}
-     */
-    description: false,
+      /**
+       * 生成网页使用的网页标题
+       * @type {string}
+       */
+      title: '',
 
-    /**
-     * 生成网页中必须包含的 chunks 列表
-     * @type {null|array}
-     */
-    chunks: null,
+      /**
+       * 生成网页使用的 favicon 图标
+       * - false: 不使用 favicon 图标
+       * - 非空字符串: favicon 图标的位置
+       * @type {(bool|string)}
+       */
+      favicon: false,
 
-    /**
-     * 生成网页中不包含的 chunks 列表
-     * @type {null|array}
-     */
-    excludeChunks: null,
+      /**
+       * 生成网页使用的关键字
+       * @type {(bool|string)}
+       */
+      keywords: false,
 
-    /**
-     * 生成网页中 chunks 排序方式
-     * - 'none': 按 webpack 生成顺序插入
-     * - 'id': 按 chunks id 正向排序
-     * - 'manual': 手动排序（暂不可用）
-     * - 'commonChunksFirst': 按 common chunks 优先方式排序
-     * - 'reverse': 按当前排序反向排序
-     * @type {string}
-     */
-    chunksSortMode: 'commonChunksFirst',
+      /**
+       * 生成网页使用的网页标题
+       * @type {(bool|string)}
+       */
+      description: false,
 
-    /**
-     * 网页文件中需要在编译时替换为 _hash 的标签属性列表
-     * 格式为 tag:attribute
-     * 如果想对所有标签的某个属性替换，请使用 * 代替 tag
-     * 如所有标签的 src 属性都需要替换，则使用 *:src
-     * @example ['*:src', 'link:href']
-     * @type {array}
-     */
-    attrs: ['img:src', 'link:href'],
+      /**
+       * 生成网页中必须包含的 chunks 列表
+       * @type {null|array}
+       */
+      chunks: null,
 
-    /**
-     * 模版中命中的静态文件编译输出的文件名
-     * @type {string}
-     */
-    path: '[path][name]_[hash:8].[ext]'
+      /**
+       * 生成网页中不包含的 chunks 列表
+       * @type {null|array}
+       */
+      excludeChunks: null,
+
+      /**
+       * 生成网页中 chunks 排序方式
+       * - 'none': 按 webpack 生成顺序插入
+       * - 'id': 按 chunks id 正向排序
+       * - 'manual': 手动排序（暂不可用）
+       * - 'commonChunksFirst': 按 common chunks 优先方式排序
+       * - 'reverse': 按当前排序反向排序
+       * @type {string}
+       */
+      chunksSortMode: 'commonChunksFirst',
+
+      /**
+       * 网页文件中需要在编译时替换为 _hash 的标签属性列表
+       * 格式为 tag:attribute
+       * 如果想对所有标签的某个属性替换，请使用 * 代替 tag
+       * 如所有标签的 src 属性都需要替换，则使用 *:src
+       * @example ['*:src', 'link:href']
+       * @type {array}
+       */
+      attrs: ['img:src', 'link:href'],
+
+      /**
+       * 模版中命中的静态文件编译输出的文件名
+       * @type {string}
+       */
+      path: '[path][name]_[hash:8].[ext]'
+    }
 
   },
 
@@ -425,11 +397,28 @@
     }
   },
 
-  /**
-   * 是否压缩代码
-   * @type {bool}
-   */
-  minimize: true,
+  /** 压缩代码配置 */
+  minimize: {
+    /**
+     * 是否压缩代码
+     * @type {bool}
+     */
+    enable: true,
+
+    /**
+     * uglifyjs plugin 配置
+     * @type {object}
+     */
+    options: {
+      // sourceMap: true,
+      uglifyOptions: {
+        output: {
+          // beautify: true,
+          comments: false
+        }
+      }
+    }
+  },
 
   /**
    * `css-loader` 配置项
@@ -537,7 +526,7 @@
      * 是否启用 webpack-visualizer-plugin
      * @type {bool}
      */
-    enable: false,
+    enable: true,
 
     /**
      * `visualizer` 配置项
@@ -549,7 +538,7 @@
        * 和 `packing build -o` 效果一样
        * @type {object}
        */
-      open: false
+      open: process.env.npm_lifecycle_event === 'build'
     }
   },
 
@@ -599,14 +588,76 @@
    * @type {object}
    */
   rewriteRules: {
-    /** 网站URL与模版的对应路由关系 */
-    '^/$': '/index',
-
-    /** API转发 */
-    '^/api/(.*)': 'require!/mock/api/$1.js'
   }
 };
 ```
+
+
+## 迁移到 packing 3
+### 修改点
+* 升级依赖包
+  * packing@latest
+  * packing-template-pug@^2.0.4
+  * packing-urlrewrite@^0.1.8
+* 用 `file-loader` 代替 `url-loader` 加载静态文件
+* 使用 `dotenv` 加载 `process.env` 环境变量
+* 将 `packing-template` 合并到 `packing` 工程，方便开发调试
+* 调整 `packing.path` 结构
+    - `path.dll` 更名为 `path.tmpDll`
+    - 删除 `assetsDist` `templatesDist` `templatesPagesDist`
+    - 删除 `packing.path.assets` 配置，如果希望直接 `import` `path.assets` 下的文件请使用 `webpack.resolve.alias` 设置
+      ```js
+      webpackConfig.resolve.alias = {
+        assets: 'assets'
+      };
+      ```
+    - 分为 `src` `dist` 两类，每种目录均使用 `root` 的相对目录
+    - 简化 `templates` 目录设置
+      - {string}:
+      - {object}
+        - layout:
+        - pages:
+    - `mockPageInit` 更名为 `mockPages`
+
+* `path.templates` 结构调整
+    - 兼容字符串类型参数
+    - 允许传入包含 `layout` `pages` 的对象参数
+
+* 默认模版类型改为 `pug`
+    - `templateEngine` 默认值由 `html` 改为 `pug`
+    - `templateExtension` 默认值由 `.html` 改为 `.pug`
+
+* `src/profiles` --> `profiles`
+    - 位置变化：该目录无需编译，移动到 `src` 目录外
+    - 格式变化：使用 `key=value` 的方式描述，每行一个配置
+
+* 编译输出目录由 `prd/assets/` 变更为 `prd/`
+* `config/packing.js` 增加了更多的配置参数
+* 增加 `stylelint` 功能
+* 增加包体积分析报表
+* 使用 `SplitChunkPlugin` 代替 `CommonChunkPlugin`，配置 vendor 时支持正则
+
+### 迁移步骤
+1. 升级依赖
+  ```
+  npm i --registry https://registry.npm.taobao.org packing@latest packing-template-pug@^2.0.4 packing-urlrewrite@^0.1.8 webpack-dev-middleware@^3.1.2 webpack-hot-middleware@^2.22.0
+  ```
+2. 创建 `.env`
+  ```
+  echo NODE_ENV=local > .env
+  ```
+3. 移动并修改 `src/profiles` -> `profiles`
+  ```
+  mv src/profiles profiles
+  ```
+4. 修改配置 `config/packing.js`
+
+5. 创建 ${entrypoint}.setttings.js，为网页设置标题
+  ```js
+  export default {
+    title: '网页标题'
+  };
+  ```
 
 ### 新手入门
 
