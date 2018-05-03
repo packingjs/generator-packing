@@ -39,13 +39,12 @@
     "express": "^4.16.3",
     "open-browser-webpack-plugin": "^0.0.5",
     "packing-ajax": "^0.0.1",<% if (props.template === 'artTemplate') { %>
-    "packing-template-artTemplate": "^1.1.2",<% } if (props.template === 'ejs') { %>
-    "packing-template-ejs": "^1.1.1",<% } if (props.template === 'handlebars') { %>
-    "packing-template-handlebars": "^1.1.1",<% } if (props.template === 'html') { %>
-    "packing-template-html": "^1.1.2",<% } if (props.template === 'pug') { %>
+    "packing-template-artTemplate": "^2.0.3",<% } if (props.template === 'ejs') { %>
+    "packing-template-ejs": "^2.0.0",<% } if (props.template === 'handlebars') { %>
+    "packing-template-handlebars": "^2.0.0",<% } if (props.template === 'pug') { %>
     "packing-template-pug": "^2.0.4",<% } if (props.template === 'smarty') { %>
-    "packing-template-smarty": "^1.2.3",<% } if (props.template === 'velocity') { %>
-    "packing-template-velocity": "^1.1.2",<% } %>
+    "packing-template-smarty": "^2.0.1",<% } if (props.template === 'velocity') { %>
+    "packing-template-velocity": "^2.0.0",<% } %>
     "packing-urlrewrite": "^0.1.8",
     "pre-commit": "^1.2.2",<% if (props.redux) { %>
     "redux-devtools": "^3.3.2",

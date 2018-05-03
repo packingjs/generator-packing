@@ -29,15 +29,13 @@
  } %>
 
 export default (packing) => {
-  const p = packing;
-  <%if (props.template !== 'pug') {%>
+  const p = packing;<%if (props.template !== 'pug') {%>
   // 模版引擎类型，目前支持的类型有[html,pug,ejs,handlebars,smarty,velocity,artTemplate]
-  p.template.engine = '<%= props.template%>';
+  p.template.options.engine = '<%= props.template%>';
   // 模版文件扩展名
-  p.template.extension = '.<%= templateExtension%>';
+  p.template.options.extension = '.<%= templateExtension%>';
   // 通用模版位置
-  p.template.source = 'src/templates/pages/default.<%= templateExtension%>';
-  <%}%>
+  p.template.options.source = 'src/templates/pages/default.<%= templateExtension%>';<%}%>
   // 网站自定义配置
   p.rewriteRules = {
     // 网站URL与模版的对应路由关系

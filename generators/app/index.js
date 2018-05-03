@@ -66,20 +66,20 @@ module.exports = yeoman.Base.extend({
   },
 
   initializing: function () {
-    var cmd = 'npm info generator-packing';
-    var stdout = child_process.execSync(cmd);
-    try {
-      eval('var info = ' + stdout.toString());
-    } catch (e) {
-      console.log(chalk.red('检查更新失败'));
-    }
-    var lastVersion = info.version;
-    var pkg = require('../../package.json');
-    var currentVersion = pkg.version;
-    if (semversion.from(currentVersion).le(lastVersion)) {
-      var message = 'Update available: ' + chalk.bold(lastVersion) + chalk.gray(' (current: ' + currentVersion + ')') + '\nRun ' + chalk.magenta('npm install -g generator-packing') + ' to update. '
-      console.log(yosay(message, { maxLength: 50 }));
-    }
+    // var cmd = 'npm info generator-packing';
+    // var stdout = child_process.execSync(cmd);
+    // try {
+    //   eval('var info = ' + stdout.toString());
+    // } catch (e) {
+    //   console.log(chalk.red('检查更新失败'));
+    // }
+    // var lastVersion = info.version;
+    // var pkg = require('../../package.json');
+    // var currentVersion = pkg.version;
+    // if (semversion.from(currentVersion).le(lastVersion)) {
+    //   var message = 'Update available: ' + chalk.bold(lastVersion) + chalk.gray(' (current: ' + currentVersion + ')') + '\nRun ' + chalk.magenta('npm install -g generator-packing') + ' to update. '
+    //   console.log(yosay(message, { maxLength: 50 }));
+    // }
     this.props = {};
   },
 
