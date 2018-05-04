@@ -226,7 +226,7 @@ module.exports = yeoman.Base.extend({
 
       this.fs.copy(
         this.templatePath('src/common/default.css'),
-        this.destinationPath('src/common/default.' + (this.props.css === 'cssnext' ? 'css' : this.props.css))
+        this.destinationPath('src/common/default.' + (this.props.css === 'cssnext' ? 'css' : (this.props.css === 'sass' ? 'scss' : this.props.css)))
       );
 
       this.fs.copy(
