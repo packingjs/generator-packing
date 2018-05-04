@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.7"></a>
+## [3.0.7](https://github.com/packingjs/generator-packing/compare/v3.0.6...v3.0.7) (2018-05-04)
+
+
+### Bug Fixes
+
+* 修复 sass 文件语法错误 ([8bedf04](https://github.com/packingjs/generator-packing/commit/8bedf04))
+
+
+
 <a name="3.0.6"></a>
 ## [3.0.6](https://github.com/packingjs/generator-packing/compare/v3.0.5...v3.0.6) (2018-05-03)
 
