@@ -20,9 +20,6 @@
    case 'velocity':
      templateExtension = 'vm';
      break;
-   case 'artTemplate':
-     templateExtension = 'html';
-     break;
    default:
      templateExtension = 'html';
      break;
@@ -30,7 +27,7 @@
 
 export default (packing) => {
   const p = packing;<%if (props.template !== 'pug') {%>
-  // 模版引擎类型，目前支持的类型有[html,pug,ejs,handlebars,smarty,velocity,artTemplate]
+  // 模版引擎类型，目前支持的类型有[html,pug,ejs,handlebars,smarty,velocity]
   p.template.options.engine = '<%= props.template%>';
   // 模版文件扩展名
   p.template.options.extension = '.<%= templateExtension%>';

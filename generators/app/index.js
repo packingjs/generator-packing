@@ -16,8 +16,7 @@ var templateExtensions = {
   handlebars: 'hbs',
   pug: 'pug',
   smarty: 'tpl',
-  velocity: 'vm',
-  artTemplate: 'html',
+  velocity: 'vm'
 };
 
 /**
@@ -185,10 +184,6 @@ module.exports = yeoman.Base.extend({
             {
               name: 'velocity',
               value: 'velocity',
-            },
-            {
-              name: 'artTemplate',
-              value: 'artTemplate',
             },
           ],
           default: 2,
