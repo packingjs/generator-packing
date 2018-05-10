@@ -176,7 +176,7 @@ export default (packing) => {
 //      * 是否启用 packing template
 //      * @type {bool}
 //      */
-//     enable: true,
+//     enabled: true,
 //
 //     /**
 //      * packing template 选项
@@ -192,7 +192,6 @@ export default (packing) => {
 //        * - handlebars
 //        * - smarty
 //        * - velocity
-//        * - artTemplate
 //        * @type {string}
 //        */
 //       engine: 'pug',
@@ -321,7 +320,7 @@ export default (packing) => {
 //      * 是否启用热模块替换
 //      * @type {bool}
 //      */
-//     enable: true,
+//     enabled: true,
 //
 //     /**
 //      * HRM 选项
@@ -337,7 +336,7 @@ export default (packing) => {
 //      * 是否启用编译时文件 hash 重命名
 //      * @type {bool}
 //      */
-//     enable: true,
+//     enabled: true,
 //
 //     /**
 //      * 缓存选项
@@ -364,7 +363,7 @@ export default (packing) => {
 //      * 是否压缩代码
 //      * @type {bool}
 //      */
-//     enable: true,
+//     enabled: true,
 //
 //     /**
 //      * uglifyjs plugin 配置
@@ -375,6 +374,7 @@ export default (packing) => {
 //       uglifyOptions: {
 //         output: {
 //           // beautify: true,
+//           // 删除注释代码
 //           comments: false
 //         }
 //       }
@@ -411,7 +411,7 @@ export default (packing) => {
 //      * 是否启用 `stylelint`
 //      * @type {bool}
 //      */
-//     enable: true,
+//     enabled: true,
 //
 //     /**
 //      * `stylelint` 配置项
@@ -429,7 +429,7 @@ export default (packing) => {
 //      * 是否启用 `eslint`
 //      * @type {bool}
 //      */
-//     enable: true,
+//     enabled: true,
 //
 //     /**
 //      * `eslint` 配置项
@@ -449,7 +449,7 @@ export default (packing) => {
 //      * 是否启用 runtimeChunk
 //      * @type {bool}
 //      */
-//     enable: false,
+//     enabled: false,
 //
 //     /**
 //      * runtimeChunk 输出的文件名
@@ -487,7 +487,7 @@ export default (packing) => {
 //      * 是否启用 webpack-visualizer-plugin
 //      * @type {bool}
 //      */
-//     enable: true,
+//     enabled: true,
 //
 //     /**
 //      * `visualizer` 配置项
@@ -509,7 +509,7 @@ export default (packing) => {
 //      * 是否使用 `GraphQL-mock-server`
 //      * @type {bool}
 //      */
-//     enable: false,
+//     enabled: false,
 //
 //     options: {
 //       /**
@@ -558,5 +558,4 @@ export default (packing) => {
 //     // '^/api/(.*)': 'http://touch.qunar.com/api/hotel/findhotelcity?cityName=%E5%8C%97%E4%BA%AC',
 //     // '^/hello': 'http://localhost:3001/123/4.html',
 //   }
-//
 // }
