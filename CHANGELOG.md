@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/packingjs/generator-packing/compare/v3.0.7...v3.1.0) (2018-05-10)
+
+
+### Features
+
+* 删除对 artTemplate 的支持 ([36e8462](https://github.com/packingjs/generator-packing/commit/36e8462))
+
+
+
 <a name="3.0.7"></a>
 ## [3.0.7](https://github.com/packingjs/generator-packing/compare/v3.0.6...v3.0.7) (2018-05-04)
 
