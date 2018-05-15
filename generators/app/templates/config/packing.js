@@ -32,7 +32,7 @@ export default (packing) => {
   // 模版文件扩展名
   p.template.options.extension = '.<%= templateExtension%>';
   // 通用模版位置
-  p.template.options.source = 'src/templates/pages/default.<%= templateExtension%>';<%}%>
+  p.template.options.master = 'src/templates/pages/default.<%= templateExtension%>';<%}%>
   // 网站自定义配置
   p.rewriteRules = {
     // 网站URL与模版的对应路由关系
@@ -238,7 +238,7 @@ export default (packing) => {
 //        * 生成网页用的源文件位置
 //        * @type {string}
 //        */
-//       source: 'src/templates/pages/default.pug',
+//       master: 'src/templates/pages/default.pug',
 //
 //       /**
 //        * 生成网页使用的字符编码

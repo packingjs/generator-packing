@@ -215,7 +215,7 @@
      * 是否启用 packing template
      * @type {bool}
      */
-    enable: true,
+    enabled: true,
 
     /**
      * packing template 选项
@@ -231,7 +231,6 @@
        * - handlebars
        * - smarty
        * - velocity
-       * - artTemplate
        * @type {string}
        */
       engine: 'pug',
@@ -244,6 +243,7 @@
 
       /**
        * 是否根据 `entry pointer` 自动生成网页文件
+       * 如需兼容 packing@<3.0.0 的工程，该值设置为 false
        * @type {bool}
        */
       autoGeneration: true,
@@ -269,31 +269,31 @@
       injectManifest: false,
 
       /**
-       * `manifest.json` 文件位置
+       * `manifest.json` 输出位置
        * @type {string}
        */
       manifest: 'manifest.json',
 
       /**
-       * 生成网页用的源文件位置
+       * 母模版位置
        * @type {string}
        */
-      source: 'src/templates/pages/default.pug',
+      master: 'src/templates/pages/default.pug',
 
       /**
-       * 生成网页使用的字符编码
+       * 输出网页使用的字符编码
        * @type {string}
        */
       charset: 'UTF-8',
 
       /**
-       * 生成网页使用的网页标题
+       * 输出网页使用的标题
        * @type {string}
        */
       title: '',
 
       /**
-       * 生成网页使用的 favicon 图标
+       * 输出网页使用的 favicon 图标
        * - false: 不使用 favicon 图标
        * - 非空字符串: favicon 图标的位置
        * @type {(bool|string)}
@@ -301,39 +301,16 @@
       favicon: false,
 
       /**
-       * 生成网页使用的关键字
+       * 输出网页使用的关键字
        * @type {(bool|string)}
        */
       keywords: false,
 
       /**
-       * 生成网页使用的网页标题
+       * 输出网页使用的描述
        * @type {(bool|string)}
        */
       description: false,
-
-      /**
-       * 生成网页中必须包含的 chunks 列表
-       * @type {null|array}
-       */
-      chunks: null,
-
-      /**
-       * 生成网页中不包含的 chunks 列表
-       * @type {null|array}
-       */
-      excludeChunks: null,
-
-      /**
-       * 生成网页中 chunks 排序方式
-       * - 'none': 按 webpack 生成顺序插入
-       * - 'id': 按 chunks id 正向排序
-       * - 'manual': 手动排序（暂不可用）
-       * - 'commonChunksFirst': 按 common chunks 优先方式排序
-       * - 'reverse': 按当前排序反向排序
-       * @type {string}
-       */
-      chunksSortMode: 'commonChunksFirst',
 
       /**
        * 网页文件中需要在编译时替换为 _hash 的标签属性列表
@@ -360,7 +337,7 @@
      * 是否启用热模块替换
      * @type {bool}
      */
-    enable: true,
+    enabled: true,
 
     /**
      * HRM 选项
@@ -376,7 +353,7 @@
      * 是否启用编译时文件 hash 重命名
      * @type {bool}
      */
-    enable: true,
+    enabled: true,
 
     /**
      * 缓存选项
@@ -403,7 +380,7 @@
      * 是否压缩代码
      * @type {bool}
      */
-    enable: true,
+    enabled: true,
 
     /**
      * uglifyjs plugin 配置
@@ -414,6 +391,7 @@
       uglifyOptions: {
         output: {
           // beautify: true,
+          // 删除注释代码
           comments: false
         }
       }
@@ -450,7 +428,7 @@
      * 是否启用 `stylelint`
      * @type {bool}
      */
-    enable: true,
+    enabled: true,
 
     /**
      * `stylelint` 配置项
@@ -468,7 +446,7 @@
      * 是否启用 `eslint`
      * @type {bool}
      */
-    enable: true,
+    enabled: true,
 
     /**
      * `eslint` 配置项
@@ -488,7 +466,7 @@
      * 是否启用 runtimeChunk
      * @type {bool}
      */
-    enable: false,
+    enabled: false,
 
     /**
      * runtimeChunk 输出的文件名
@@ -526,7 +504,7 @@
      * 是否启用 webpack-visualizer-plugin
      * @type {bool}
      */
-    enable: true,
+    enabled: true,
 
     /**
      * `visualizer` 配置项
@@ -548,7 +526,7 @@
      * 是否使用 `GraphQL-mock-server`
      * @type {bool}
      */
-    enable: false,
+    enabled: false,
 
     options: {
       /**
@@ -588,6 +566,7 @@
    * @type {object}
    */
   rewriteRules: {
+    '^/api/(.*)': 'require!/mock/api/$1.js'
   }
 };
 ```
@@ -663,16 +642,27 @@
 
 #### 如何新增一个页面
 假设新增页面的路由为 `/login`，只需要新增入口文件  `src/pages/login/entry.js` 即可：
+
 ```js
 // src/pages/login/entry.js
 document.write('login');
 ```
-就这么简单！
 
 使用 `http://localhost:8081/login` 查看页面效果。
 
+#### 如何使用不同的母模版
+所有网页默认都是通过模版自动生成出来的，默认母模版的位置为 `src/templates/pages/default.pug`。
+
+可以使用与 `${entrypoint}.js` 同级目录的 `${entrypoint}.settings.js` 来控制该 ${entrypoint} 使用母模版。
+```js
+// src/pages/login/entry.settings.js
+export default {
+  master: 'src/templates/layout/other.pug'
+};
+```
+
 #### 如何控制网页标题
-所有网页默认都是通过模版自动生成出来的，可以使用 `entry.settings.js` 来控制网页标题，类似的参数还有  `keywords` 和 `description`
+和自定义母模版的方式一样，可以使用 `${entrypoint}.settings.js` 来控制网页标题，类似的可控制的参数还有 `keywords` 和 `description`。
 
 ```js
 // src/pages/login/entry.settings.js
@@ -680,15 +670,6 @@ export default {
   title: '登录',
   // keywords: '登录 注册',
   // description: '这是登录页'
-};
-```
-
-#### 如何使用不同的母模版
-可以使用 `entry.settings.js` 来控制网页使用的母模版位置，默认位置为 `src/templates/pages/default.pug`
-```js
-// src/pages/login/entry.settings.js
-export default {
-  source: 'src/templates/layout/other.pug'
 };
 ```
 
