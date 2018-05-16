@@ -97,7 +97,8 @@ module.exports = yeoman.Base.extend({
     if (this.options['skip-welcome-message'] !== 'true') {
       // Have Yeoman greet the user.
       this.log(yosay(
-        'Welcome to the breathtaking ' + chalk.red('generator-packing') + ' generator!'
+        'Welcome to the breathtaking ' + chalk.red('generator-packing') + ' generator!',
+        { maxLength: 70 }
       ));
     }
 
@@ -109,34 +110,43 @@ module.exports = yeoman.Base.extend({
         {
           type: 'input',
           name: 'name',
-          message: 'name',
-          default: this.appname,
+          message: '项目名称',
+          default: this.appname
         },
         {
           type: 'confirm',
           name: 'react',
-          message: 'Use react?',
-          default: true,
+          message: '使用 react 吗？',
+          default: true
         },
         {
           type: 'confirm',
           name: 'redux',
-          message: 'Use redux?',
+          message: '使用 redux 吗？',
           default: true,
           when: function (answers) {
             return answers.react;
-          },
+          }
         },
         {
-          type: 'confirm',
-          name: 'maven',
-          message: 'Use maven?',
-          default: true,
+          type: 'list',
+          name: 'ci',
+          message: '选择发布平台：',
+          choices: [
+            {
+              name: 'portal',
+              value: 'portal',
+            },
+            {
+              name: 'qdr',
+              value: 'qdr',
+            }
+          ]
         },
         {
           type: 'list',
           name: 'css',
-          message: 'Choose a CSS Preprocessor:',
+          message: '选择 CSS 预处理语言：',
           choices: [
             {
               name: 'css',
@@ -155,20 +165,13 @@ module.exports = yeoman.Base.extend({
               value: 'sass',
             },
           ],
+          default: 1
         },
         {
           type: 'list',
           name: 'template',
-          message: 'Choose a template:',
+          message: '选择后端模版类型：',
           choices: [
-            {
-              name: 'ejs',
-              value: 'ejs',
-            },
-            {
-              name: 'handlebars',
-              value: 'handlebars',
-            },
             {
               name: 'html',
               value: 'html',
@@ -176,6 +179,14 @@ module.exports = yeoman.Base.extend({
             {
               name: 'pug',
               value: 'pug',
+            },
+            {
+              name: 'ejs',
+              value: 'ejs',
+            },
+            {
+              name: 'handlebars',
+              value: 'handlebars',
             },
             {
               name: 'smarty',
@@ -186,14 +197,8 @@ module.exports = yeoman.Base.extend({
               value: 'velocity',
             },
           ],
-          default: 2,
-        },
-        // {
-        //   type: 'confirm',
-        //   name: 'intranet',
-        //   message: 'Are you in the QUNAR office network?',
-        //   default: false,
-        // },
+          default: 1
+        }
       ];
 
       return this.prompt(prompts).then(function (a) {
@@ -333,7 +338,7 @@ module.exports = yeoman.Base.extend({
     },
 
     pom: function () {
-      if (this.props.maven) {
+      if (this.props.ci === 'qdr') {
         this.fs.copyTpl(
           this.templatePath('pom.xml'),
           this.destinationPath('pom.xml'),
@@ -370,7 +375,7 @@ module.exports = yeoman.Base.extend({
         this.templatePath('stylelintrc.js'),
         this.destinationPath('.stylelintrc.js')
       );
-    },
+    }
 
   },
 
@@ -387,6 +392,6 @@ module.exports = yeoman.Base.extend({
   },
 
   end: function () {
-    console.log('🔚');
-  },
+    console.log('👌👌👌');
+  }
 });

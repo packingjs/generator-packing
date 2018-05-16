@@ -26,13 +26,23 @@
  } %>
 
 export default (packing) => {
-  const p = packing;<%if (props.template !== 'pug') {%>
+  const p = packing;<%if (props.ci === 'qdr') {%>
+
+  // 工程使用的编译平台，目前支持 portal 和 qdr
+  p.ci = 'qdr';
+
+  // webpack 编译产物输出目录
+  p.path.dist.root = 'prd';<% } if (props.template !== 'pug') { %>
+
   // 模版引擎类型，目前支持的类型有[html,pug,ejs,handlebars,smarty,velocity]
   p.template.options.engine = '<%= props.template%>';
+
   // 模版文件扩展名
   p.template.options.extension = '.<%= templateExtension%>';
+
   // 通用模版位置
-  p.template.options.master = 'src/templates/pages/default.<%= templateExtension%>';<%}%>
+  p.template.options.master = 'src/templates/pages/default.<%= templateExtension%>';<% } %>
+
   // 网站自定义配置
   p.rewriteRules = {
     // 网站URL与模版的对应路由关系
@@ -46,6 +56,15 @@ export default (packing) => {
 
 /** 所有配置项及默认值 */
 // {
+//   /**
+//    * 工程使用的编译平台
+//    * 目前支持
+//    * - portal
+//    * - qdr
+//    * @type {string}
+//    */
+//   ci: 'portal',
+//
 //   /**
 //    * 本地访问的域名
 //    * 如果需要使用 `qunar.com` 的 cookie，需要改成类似 `my.qunar.com` 这种
@@ -100,9 +119,11 @@ export default (packing) => {
 //       /**
 //        * webpack 编译产物输出目录
 //        * 即 `webpack.config.output.path` 参数
+//        * portal dev 发布时要求输出到 `dev` 目录
+//        * qdr dev 发布时要求输出到 `prd` 目录
 //        * @type {string}
 //        */
-//       root: 'prd',
+//       root: process.env.NODE_ENV === 'development' ? 'dev' : 'prd',
 //
 //       /**
 //        * 模版文件路径
@@ -204,6 +225,7 @@ export default (packing) => {
 //
 //       /**
 //        * 是否根据 `entry pointer` 自动生成网页文件
+//        * 如需兼容 packing@<3.0.0 的工程，该值设置为 false
 //        * @type {bool}
 //        */
 //       autoGeneration: true,
@@ -229,31 +251,31 @@ export default (packing) => {
 //       injectManifest: false,
 //
 //       /**
-//        * `manifest.json` 文件位置
+//        * `manifest.json` 输出位置
 //        * @type {string}
 //        */
 //       manifest: 'manifest.json',
 //
 //       /**
-//        * 生成网页用的源文件位置
+//        * 母模版位置
 //        * @type {string}
 //        */
 //       master: 'src/templates/pages/default.pug',
 //
 //       /**
-//        * 生成网页使用的字符编码
+//        * 输出网页使用的字符编码
 //        * @type {string}
 //        */
 //       charset: 'UTF-8',
 //
 //       /**
-//        * 生成网页使用的网页标题
+//        * 输出网页使用的标题
 //        * @type {string}
 //        */
 //       title: '',
 //
 //       /**
-//        * 生成网页使用的 favicon 图标
+//        * 输出网页使用的 favicon 图标
 //        * - false: 不使用 favicon 图标
 //        * - 非空字符串: favicon 图标的位置
 //        * @type {(bool|string)}
@@ -261,39 +283,16 @@ export default (packing) => {
 //       favicon: false,
 //
 //       /**
-//        * 生成网页使用的关键字
+//        * 输出网页使用的关键字
 //        * @type {(bool|string)}
 //        */
 //       keywords: false,
 //
 //       /**
-//        * 生成网页使用的网页标题
+//        * 输出网页使用的描述
 //        * @type {(bool|string)}
 //        */
 //       description: false,
-//
-//       /**
-//        * 生成网页中必须包含的 chunks 列表
-//        * @type {null|array}
-//        */
-//       chunks: null,
-//
-//       /**
-//        * 生成网页中不包含的 chunks 列表
-//        * @type {null|array}
-//        */
-//       excludeChunks: null,
-//
-//       /**
-//        * 生成网页中 chunks 排序方式
-//        * - 'none': 按 webpack 生成顺序插入
-//        * - 'id': 按 chunks id 正向排序
-//        * - 'manual': 手动排序（暂不可用）
-//        * - 'commonChunksFirst': 按 common chunks 优先方式排序
-//        * - 'reverse': 按当前排序反向排序
-//        * @type {string}
-//        */
-//       chunksSortMode: 'commonChunksFirst',
 //
 //       /**
 //        * 网页文件中需要在编译时替换为 _hash 的标签属性列表
@@ -549,13 +548,7 @@ export default (packing) => {
 //    * @type {object}
 //    */
 //   rewriteRules: {
-//     /** 网站URL与模版的对应路由关系 */
-//     // '^/$': '/index',
-//
 //     /** API转发 */
 //     '^/api/(.*)': 'require!/mock/api/$1.js'
-//     // '^/api/(.*)': '/index.jade.html',
-//     // '^/api/(.*)': 'http://touch.qunar.com/api/hotel/findhotelcity?cityName=%E5%8C%97%E4%BA%AC',
-//     // '^/hello': 'http://localhost:3001/123/4.html',
 //   }
 // }

@@ -17,7 +17,13 @@
   },
   "pre-commit": [
     "lint"
-  ],
+  ],<% if (props.ci === 'portal') { %>
+  "f2b": {
+    "path": "templates",
+    "project": "<%= props.name %>",
+    "type": "zip",
+    "version": "xxx"
+  },<% } %>
   "dependencies": {
     "babel-preset-stage-0": "^6.24.1",<% if (props.css === 'less') { %>
     "less": "^2.7.2",
@@ -32,7 +38,7 @@
     "react-transform-catch-errors": "^1.0.2",<% } if (props.redux) { %>
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",<% } %>
-    "packing": "^3.2.2"
+    "packing": "^3.2.3"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
