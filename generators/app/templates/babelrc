@@ -10,7 +10,7 @@
   ],
 
   "plugins": [
-    "transform-runtime",
+    ["transform-runtime", { "helpers": false, "polyfill": false, "regenerator": true }],
     "add-module-exports",
     "transform-decorators-legacy"<% if (props.react) { %>,
     "transform-react-display-name"<% } %>
