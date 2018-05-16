@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/packingjs/generator-packing/compare/v3.1.2...v3.2.0) (2018-05-16)
+
+
+### Features
+
+* 增加编译平台选项 ([a520a3f](https://github.com/packingjs/generator-packing/commit/a520a3f))
+
+
+
 <a name="3.1.2"></a>
 ## [3.1.2](https://github.com/packingjs/generator-packing/compare/v3.1.1...v3.1.2) (2018-05-14)
 
