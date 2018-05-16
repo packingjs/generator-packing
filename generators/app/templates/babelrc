@@ -10,6 +10,7 @@
   ],
 
   "plugins": [
+    "transform-runtime",
     "add-module-exports",
     "transform-decorators-legacy"<% if (props.react) { %>,
     "transform-react-display-name"<% } %>

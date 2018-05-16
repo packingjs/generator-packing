@@ -38,7 +38,7 @@
     "react-transform-catch-errors": "^1.0.2",<% } if (props.redux) { %>
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",<% } %>
-    "packing": "^3.2.3"
+    "packing": "^3.2.4"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
