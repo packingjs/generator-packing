@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.4"></a>
+## [3.2.4](https://github.com/packingjs/generator-packing/compare/v3.2.3...v3.2.4) (2018-07-31)
+
+
+### Bug Fixes
+
+* 修复编译失败时不终止 jenkins 的问题，导致错误代码发布到线上环境 ([7b1cd3c](https://github.com/packingjs/generator-packing/commit/7b1cd3c))
+
+
+
 <a name="3.2.3"></a>
 ## [3.2.3](https://github.com/packingjs/generator-packing/compare/v3.2.2...v3.2.3) (2018-06-27)
 
