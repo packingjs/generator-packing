@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 程序中有任何异常时返回非零异常错误
+set -e
+
 export PATH=/usr/local/n/versions/node/6.2.1/bin:$PATH
 #export PATH=/usr/local/n/versions/node/7.10.0/bin:$PATH
 #export PATH=/usr/local/n/versions/node/8.9.1/bin:$PATH
