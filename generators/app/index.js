@@ -153,8 +153,8 @@ module.exports = yeoman.Base.extend({
               value: 'css',
             },
             {
-              name: 'cssnext',
-              value: 'cssnext',
+              name: 'postcss-preset-env',
+              value: 'postcss-preset-env',
             },
             {
               name: 'less',
@@ -226,7 +226,7 @@ module.exports = yeoman.Base.extend({
 
       this.fs.copy(
         this.templatePath('src/common/default.css'),
-        this.destinationPath('src/common/default.' + (this.props.css === 'cssnext' ? 'css' : (this.props.css === 'sass' ? 'scss' : this.props.css)))
+        this.destinationPath('src/common/default.' + (this.props.css === 'postcss-preset-env' ? 'css' : (this.props.css === 'sass' ? 'scss' : this.props.css)))
       );
 
       this.fs.copy(
@@ -295,8 +295,8 @@ module.exports = yeoman.Base.extend({
 
     babelrc: function () {
       this.fs.copyTpl(
-        this.templatePath('babelrc'),
-        this.destinationPath('.babelrc'),
+        this.templatePath('babel.config.js'),
+        this.destinationPath('babel.config.js'),
         { props: this.props }
       );
     },
