@@ -13,6 +13,9 @@
   ],
   "scripts": {
     "release": "standard-version && npm publish",
+    "release:minor": "standard-version --release-as minor && npm publish",
+    "release:major": "standard-version --release-as major && npm publish",
+    "release": "standard-version && npm publish",
     "postrelease": "git push && git push origin --tags"
   },
   "main": "generators/index.js",
