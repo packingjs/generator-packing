@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/packingjs/generator-packing/compare/v3.2.4...v3.3.0) (2018-12-01)
+
+
+### Features
+
+* 支持 babel 7 ([06fb3d5](https://github.com/packingjs/generator-packing/commit/06fb3d5))
+
+
+
 <a name="3.2.4"></a>
 ## [3.2.4](https://github.com/packingjs/generator-packing/compare/v3.2.3...v3.2.4) (2018-07-31)
 
