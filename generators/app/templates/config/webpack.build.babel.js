@@ -8,8 +8,16 @@
  */
 
 export default (webpackConfig/* , program, appConfig */) => {
-  const config = webpackConfig;
-  // webpackConfig 为系统默认的webpack配置，此处可以根据项目情况修改
+  const config = webpackConfig;<% if (props.typescript) {%>
+
+  // babel-loader 中增加对 .ts/.tsx 的匹配
+  const [jsloader] = config.module.rules;
+  jsloader.test = /\.(t|j)sx?$/i;
+
+  // 设置文件扩展名，支持 .ts/.tsx
+  config.resolve.extensions = ['.tsx', '.jsx', '.ts', '.js'];
+
+  <% } %>// webpackConfig 为系统默认的webpack配置，此处可以根据项目情况修改
   // 修改 entry
   // config.entry = 'xxx/xxx.js';
   // 修改 plugins（修改 ＝ 先删除现有的，再添加新的）
