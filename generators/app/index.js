@@ -115,6 +115,12 @@ module.exports = yeoman.Base.extend({
         },
         {
           type: 'confirm',
+          name: 'typescript',
+          message: '使用 typescript 吗？',
+          default: true
+        },
+        {
+          type: 'confirm',
           name: 'react',
           message: '使用 react 吗？',
           default: true
@@ -162,7 +168,7 @@ module.exports = yeoman.Base.extend({
             },
             {
               name: 'sass',
-              value: 'sass',
+              value: 'scss',
             },
           ],
           default: 1
@@ -213,6 +219,10 @@ module.exports = yeoman.Base.extend({
 
   writing: {
     folders: function () {
+      var jsExt = this.props.typescript ? 'ts' : 'js';
+      var cssExt = this.props.css === 'postcss-preset-env' ? 'css' : this.props.css;
+      var tmpExt = templateExtensions[this.props.template];
+
       // copy only
       this.fs.copy(
         this.templatePath('assets'),
@@ -225,13 +235,13 @@ module.exports = yeoman.Base.extend({
       );
 
       this.fs.copy(
-        this.templatePath('src/common/default.css'),
-        this.destinationPath('src/common/default.' + (this.props.css === 'postcss-preset-env' ? 'css' : (this.props.css === 'sass' ? 'scss' : this.props.css)))
+        this.templatePath('src/common/default.' + cssExt),
+        this.destinationPath('src/common/default.' + cssExt)
       );
 
       this.fs.copy(
-        this.templatePath('src/common/now.js'),
-        this.destinationPath('src/common/now.js')
+        this.templatePath('src/common/now.' + jsExt),
+        this.destinationPath('src/common/now.' + jsExt)
       );
 
       this.fs.copyTpl(
@@ -240,10 +250,17 @@ module.exports = yeoman.Base.extend({
         { props: this.props }
       );
 
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('src/pages'),
-        this.destinationPath('src/pages')
+        this.destinationPath('src/pages'),
+        { props: this.props }
       );
+
+      if (!this.props.typescript) {
+        this.fs.unlink(
+          this.templatePath('src/pages/index/Header.tsx')
+        )
+      }
 
       if (this.props.template === 'pug') {
         this.fs.copy(
@@ -252,10 +269,9 @@ module.exports = yeoman.Base.extend({
         );
       }
 
-      var ext = templateExtensions[this.props.template];
       this.fs.copy(
-        this.templatePath('src/templates/pages/default.' + ext),
-        this.destinationPath('src/templates/pages/default.' + ext)
+        this.templatePath('src/templates/pages/default.' + tmpExt),
+        this.destinationPath('src/templates/pages/default.' + tmpExt)
       );
 
       this.fs.copy(
@@ -371,10 +387,20 @@ module.exports = yeoman.Base.extend({
     },
 
     stylelintrc: function () {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('stylelintrc.js'),
-        this.destinationPath('.stylelintrc.js')
+        this.destinationPath('.stylelintrc.js'),
+        { props: this.props }
       );
+    },
+
+    tsconfig: function () {
+      if (this.props.typescript) {
+        this.fs.copy(
+          this.templatePath('tsconfig.json'),
+          this.destinationPath('tsconfig.json')
+        );
+      }
     }
 
   },
