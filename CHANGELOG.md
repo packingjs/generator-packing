@@ -1,6 +1,15 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.4.0](https://github.com/packingjs/generator-packing/compare/v3.3.1...v3.4.0) (2019-10-30)
+
+
+### Features
+
+* 支持 typescript ([f26fe4a](https://github.com/packingjs/generator-packing/commit/f26fe4ae3cdffc285137a02445adf35f7d4b7c06))
+* 支持用 stylelint 检查 SASS 文件 ([afb4142](https://github.com/packingjs/generator-packing/commit/afb41429161ab9c202de232a7401e9aee5aa6c47))
+* 默认支持 IE10 CSS ([ed13110](https://github.com/packingjs/generator-packing/commit/ed131107b13631b019dc773f5d20dacf634f037e))
 
 <a name="3.3.1"></a>
 ## [3.3.1](https://github.com/packingjs/generator-packing/compare/v3.3.0...v3.3.1) (2019-08-29)
