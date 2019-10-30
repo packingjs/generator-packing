@@ -1,5 +1,6 @@
 module.exports = {
-  presets: [<% if (props.react) { %>
+  presets: [<% if (props.typescript) { %>
+    '@babel/preset-typescript',<% } if (props.react) { %>
     '@babel/preset-react',<% } %>
     [
       '@babel/preset-env',
@@ -10,7 +11,7 @@ module.exports = {
             '> 1%',
             'Android >= 4.4',
             'IOS >= 7',
-            'ie >= 9'
+            'ie >= 10'
           ]
         }
       }
