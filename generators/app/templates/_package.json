@@ -16,6 +16,10 @@
     "lint": "npm run stylelint && npm run eslint",
     "lint:staged": "lint-staged"
   },
+  "lint-staged": {
+    "*.js": "eslint",
+    "*.?(s)css": "stylelint"
+  },
   "pre-commit": [
     "lint:staged"
   ],<% if (props.ci === 'portal') { %>
