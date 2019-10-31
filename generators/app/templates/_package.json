@@ -13,10 +13,11 @@
     "serve:dist": "npm run start:dist",
     "stylelint": "stylelint --fix \"src/**/*.(css|less|sass|scss)\"",
     "eslint": "eslint --fix src",
-    "lint": "npm run stylelint && npm run eslint"
+    "lint": "npm run stylelint && npm run eslint",
+    "lint:staged": "lint-staged"
   },
   "pre-commit": [
-    "lint"
+    "lint:staged"
   ],<% if (props.ci === 'portal') { %>
   "f2b": {
     "path": "templates",
@@ -69,6 +70,7 @@
     "@types/react-dom": "^16.9.3",<% } %>
     "eslint": "^6.6.0",
     "express": "^4.17.1",
+    "lint-staged": "^10.0.0-1",
     "open-browser-webpack-plugin": "^0.0.5",
     "packing-ajax": "^0.0.1",<% if (props.template === 'ejs') { %>
     "packing-template-ejs": "^2.0.0",<% } if (props.template === 'handlebars') { %>
