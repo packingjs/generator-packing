@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.1](https://github.com/packingjs/generator-packing/compare/v3.5.0...v3.5.1) (2019-10-31)
+
+
+### Bug Fixes
+
+* 遗漏了 lint-staged 节点 ([a71fce6](https://github.com/packingjs/generator-packing/commit/a71fce63e335dd6aae8a40ade3847da38f529162))
+
 ## [3.5.0](https://github.com/packingjs/generator-packing/compare/v3.4.0...v3.5.0) (2019-10-31)
 
 
