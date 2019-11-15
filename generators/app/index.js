@@ -257,7 +257,7 @@ module.exports = yeoman.Base.extend({
       );
 
       if (!this.props.typescript) {
-        this.fs.unlink(
+        this.fs.delete(
           this.templatePath('src/pages/index/Header.tsx')
         )
       }
