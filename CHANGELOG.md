@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.2](https://github.com/packingjs/generator-packing/compare/v3.5.1...v3.5.2) (2019-11-15)
+
+
+### Bug Fixes
+
+* fix unlink error ([a1b722a](https://github.com/packingjs/generator-packing/commit/a1b722a3f5f3026ad612cb8f87a748124bd52e0e))
+
 ### [3.5.1](https://github.com/packingjs/generator-packing/compare/v3.5.0...v3.5.1) (2019-10-31)
 
 
