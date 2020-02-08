@@ -3,9 +3,9 @@
 # 程序中有任何异常时返回非零异常错误
 set -e
 
-export PATH=/usr/local/n/versions/node/6.2.1/bin:$PATH
+#export PATH=/usr/local/n/versions/node/6.2.1/bin:$PATH
 #export PATH=/usr/local/n/versions/node/7.10.0/bin:$PATH
-#export PATH=/usr/local/n/versions/node/8.9.1/bin:$PATH
+export PATH=/usr/local/n/versions/node/12.13.1/bin:$PATH
 
 help()
 {
@@ -20,8 +20,10 @@ help()
 if [ ! -n "$1" ]; then
   echo "[build.sh][Error]缺少参数type"
   help
+  exit 1
 elif [[ "dev" != "$1" && "beta" != "$1" && "prod" != "$1" ]]; then
   echo "[build.sh][Error]参数type错误"
+  exit 1
   help
 else
   echo type: $1

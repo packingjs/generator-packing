@@ -12,7 +12,7 @@
     "serve": "npm start",
     "serve:dist": "npm run start:dist",
     "stylelint": "stylelint --fix \"src/**/*.(css|less|sass|scss)\"",
-    "eslint": "eslint --fix src",
+    "eslint": "eslint --report-unused-disable-directives --fix src",
     "lint": "npm run stylelint && npm run eslint",
     "lint:staged": "lint-staged"
   },
@@ -47,7 +47,8 @@
     "@babel/plugin-proposal-throw-expressions": "^7.2.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
-    "@babel/polyfill": "^7.6.0",<% if (props.css === 'less') { %>
+    "@babel/polyfill": "^7.6.0",
+    "core-js": "^3.6.4",<% if (props.css === 'less') { %>
     "less": "^3.10.3",
     "less-loader": "^5.0.0",<% } if (props.css === 'postcss-preset-env') { %>
     "postcss-preset-env": "^6.7.0",<% } if (props.css === 'scss') { %>
@@ -65,14 +66,14 @@
     "redux": "^4.0.4",<% } if (props.typescript) { %>
     "@babel/preset-typescript": "^7.6.0",
     "typescript": "^3.6.4",<% } %>
+    "eslint": "^6.6.0",
     "eslint-config-qunar<% if (props.typescript) { %>-typescript<% } %>-<% if (props.react) { %>react<% } else { %>base<% } %>": "1.0.3",
-    "packing": "^6.0.0"
+    "packing": "^6.1.0"
   },
   "devDependencies": {
     "@babel/register": "^7.6.2",<% if (props.typescript) { %>
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.9.3",<% } %>
-    "eslint": "^6.6.0",
     "express": "^4.17.1",
     "lint-staged": "^10.0.0-1",
     "open-browser-webpack-plugin": "^0.0.5",
