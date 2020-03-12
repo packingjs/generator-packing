@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.4](https://github.com/packingjs/generator-packing/compare/v3.5.3...v3.5.4) (2020-03-12)
+
 ### [3.5.3](https://github.com/packingjs/generator-packing/compare/v3.5.2...v3.5.3) (2020-02-08)
 
 ### [3.5.2](https://github.com/packingjs/generator-packing/compare/v3.5.1...v3.5.2) (2019-11-15)
