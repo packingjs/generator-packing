@@ -22,13 +22,7 @@
   },
   "pre-commit": [
     "lint:staged"
-  ],<% if (props.ci === 'portal') { %>
-  "f2b": {
-    "path": "templates",
-    "project": "<%= props.name %>",
-    "type": "zip",
-    "version": "xxx"
-  },<% } %>
+  ],
   "dependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -68,7 +62,7 @@
     "typescript": "^3.6.4",<% } %>
     "eslint": "^6.6.0",
     "eslint-config-qunar<% if (props.typescript) { %>-typescript<% } %>-<% if (props.react) { %>react<% } else { %>base<% } %>": "1.0.3",
-    "packing": "^6.1.0"
+    "packing": "^6.1.5"
   },
   "devDependencies": {
     "@babel/register": "^7.6.2",<% if (props.typescript) { %>

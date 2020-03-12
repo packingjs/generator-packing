@@ -26,13 +26,7 @@
  } %>
 
 export default (packing) => {
-  const p = packing;<%if (props.ci === 'qdr') {%>
-
-  // 工程使用的编译平台，目前支持 portal 和 qdr
-  p.ci = 'qdr';
-
-  // webpack 编译产物输出目录
-  p.path.dist.root = 'prd';<% } if (props.template !== 'pug') { %>
+  const p = packing;<% if (props.template !== 'pug') { %>
 
   // 模版引擎类型，目前支持的类型有[html,pug,ejs,handlebars,smarty,velocity]
   p.template.options.engine = '<%= props.template%>';
@@ -56,15 +50,6 @@ export default (packing) => {
 
 /** 所有配置项及默认值 */
 // {
-//   /**
-//    * 工程使用的编译平台
-//    * 目前支持
-//    * - portal
-//    * - qdr
-//    * @type {string}
-//    */
-//   ci: 'portal',
-//
 //   /**
 //    * 本地访问的域名
 //    * 如果需要使用 `qunar.com` 的 cookie，需要改成类似 `my.qunar.com` 这种

@@ -136,21 +136,6 @@ module.exports = yeoman.Base.extend({
         },
         {
           type: 'list',
-          name: 'ci',
-          message: '选择发布平台：',
-          choices: [
-            {
-              name: 'portal',
-              value: 'portal',
-            },
-            {
-              name: 'qdr',
-              value: 'qdr',
-            }
-          ]
-        },
-        {
-          type: 'list',
           name: 'css',
           message: '选择 CSS 预处理语言：',
           choices: [
@@ -219,7 +204,7 @@ module.exports = yeoman.Base.extend({
 
   writing: {
     folders: function () {
-      var jsExt = this.props.typescript ? 'ts' : 'js';
+      var jsExt = this.props.typescript ? 'tsx' : 'js';
       var cssExt = this.props.css === 'postcss-preset-env' ? 'css' : this.props.css;
       var tmpExt = templateExtensions[this.props.template];
 
@@ -251,16 +236,34 @@ module.exports = yeoman.Base.extend({
       );
 
       this.fs.copyTpl(
-        this.templatePath('src/pages'),
-        this.destinationPath('src/pages'),
+        this.templatePath('src/pages/about/entry.js'),
+        this.destinationPath('src/pages/about/entry.' + jsExt),
         { props: this.props }
       );
 
-      if (!this.props.typescript) {
-        this.fs.delete(
-          this.templatePath('src/pages/index/Header.tsx')
-        )
-      }
+      this.fs.copyTpl(
+        this.templatePath('src/pages/about/entry.settings.js'),
+        this.destinationPath('src/pages/about/entry.settings.' + jsExt),
+        { props: this.props }
+      );
+
+      this.fs.copyTpl(
+        this.templatePath('src/pages/index/entry.js'),
+        this.destinationPath('src/pages/index/entry.' + jsExt),
+        { props: this.props }
+      );
+
+      this.fs.copyTpl(
+        this.templatePath('src/pages/index/entry.settings.js'),
+        this.destinationPath('src/pages/index/entry.settings.' + jsExt),
+        { props: this.props }
+      );
+
+      this.fs.copyTpl(
+        this.templatePath('src/pages/index/Header.js'),
+        this.destinationPath('src/pages/index/Header.' + jsExt),
+        { props: this.props }
+      );
 
       if (this.props.template === 'pug') {
         this.fs.copy(
@@ -354,13 +357,11 @@ module.exports = yeoman.Base.extend({
     },
 
     pom: function () {
-      if (this.props.ci === 'qdr') {
-        this.fs.copyTpl(
-          this.templatePath('pom.xml'),
-          this.destinationPath('pom.xml'),
-          { props: this.props }
-        );
-      }
+      this.fs.copyTpl(
+        this.templatePath('pom.xml'),
+        this.destinationPath('pom.xml'),
+        { props: this.props }
+      );
     },
 
     postcssrc: function () {

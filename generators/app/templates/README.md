@@ -4,7 +4,7 @@
 
 1. 启动开发模式
   ```
-  npm run serve
+  npm start
   ```
 
 2. 在浏览器中预览网站 `http://localhost:8081`
@@ -59,6 +59,46 @@
 ├── package.json
 ├── pom.xml                             # maven配置
 └── README.md                   
+```
+
+## import 路径约定(ts only)
+`tsconfig.js` 配置了 `compilerOptions.baseUrl: "./src"` ，因此 `import` 时路径有两种写法：
+- 使用当前文件的相对路径
+- 使用 `src` 的相对路径
+
+为了保证代码的一致性，现对 import 路径的写法作如下约定：
+- 地址中不出现 `..`（不推荐往上级目录导入）
+- 地址中优先使用 `.`（推荐往下级目录导入）
+
+假设文件的目录结构如下， `src/pages/a.ts` 需要分别引用 `src/pages/components/b.ts` 和 `src/config/c.ts`
+```
+.
+└── /src/
+   ├── /pages
+   │   ├── /a.ts
+   │   └── /components
+   │       └── /b.ts
+   └──/config
+       └── /c.ts
+```
+那么在 `a.ts` 中，下面的写法都是正确的：
+```js
+// src/pages/a.ts
+import './components/b';
+import 'pages/components/b';
+
+import '../config/c';
+import 'config/c';
+```
+但推荐的写法是
+```js
+// good
+import './components/b';
+import 'config/c';
+
+// bad
+import 'pages/components/b';
+import '../config/c';
 ```
 
 ## 约定
