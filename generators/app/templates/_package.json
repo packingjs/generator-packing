@@ -17,7 +17,7 @@
     "lint:staged": "lint-staged"
   },
   "lint-staged": {
-    "*.js": "eslint",
+    "*.js": "eslint --report-unused-disable-directives",
     "*.?(s)css": "stylelint"
   },
   "pre-commit": [
