@@ -62,7 +62,7 @@
     "typescript": "^3.6.4",<% } %>
     "eslint": "^6.6.0",
     "eslint-config-qunar<% if (props.typescript) { %>-typescript<% } %>-<% if (props.react) { %>react<% } else { %>base<% } %>": "1.1.17",
-    "packing": "^6.1.5"
+    "packing": "^6.2.0"
   },
   "devDependencies": {
     "@babel/register": "^7.6.2",<% if (props.typescript) { %>

@@ -33,6 +33,10 @@
   # 编译时自动打开包体积报告网页
   npm run build -- --open
   npm run build -- -o
+
+  # 启动时编译部分页面
+  npm run build -- --partial
+  npm run build -- -p
   ```
 
 ## 目录结构
