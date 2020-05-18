@@ -5,7 +5,7 @@
   "scripts": {
     "start": "packing serve",
     "start:dist": "packing build && packing serve-dist",
-    "build": "packing build -o",
+    "build": "packing build",
     "build:dev": "NODE_ENV=development packing build",
     "build:beta": "NODE_ENV=beta packing build",
     "build:prod": "NODE_ENV=production packing build",
