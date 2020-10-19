@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.6](https://github.com/packingjs/generator-packing/compare/v3.5.5...v3.5.6) (2020-10-19)
+
+
+### Bug Fixes
+
+* 删除 build 命令中的 -o 参数 ([f0bb6f7](https://github.com/packingjs/generator-packing/commit/f0bb6f7732a5857e3f1fee0ccb6f83f0dcbc601f))
+
 ### [3.5.5](https://github.com/packingjs/generator-packing/compare/v3.5.4...v3.5.5) (2020-03-24)
 
 ### [3.5.4](https://github.com/packingjs/generator-packing/compare/v3.5.3...v3.5.4) (2020-03-12)
