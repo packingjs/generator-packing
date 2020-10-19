@@ -45,6 +45,9 @@ export default (packing) => {
     '^/api/(.*)': 'require!/mock/api/$1.js'
   };
 
+  // 是否启用打包分析工具
+  p.bundleAnalyzer.enabled = false;
+
   return p;
 };
 
