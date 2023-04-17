@@ -27,7 +27,7 @@
     "object-assign": "^4.1.0",
     "packing-glob": "^1.0.1",
     "semversion": "^1.0.1",
-    "yeoman-generator": "^0.23.0",
+    "yeoman-generator": "^5.8.0",
     "yosay": "^1.0.0"
   },
   "repository": "packingjs/generator-packing",
